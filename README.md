@@ -1,5 +1,8 @@
 #Abalo
 
+##
+* Sayed Ali Mir Hosseini Zamani, 3281423
+
 ## Migrate and Seed
 * ``php artisan migrate``
 * ``composer dumpautoload``
