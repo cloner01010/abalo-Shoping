@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <title>Abalo Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-    <style> {{ file_get_contents(base_path('resources/css/login.css')) }} </style>
+    <link rel="stylesheet" href="{{ asset('storage/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('storage/css/cookiecheck.css') }}">
 </head>
 <body>
+@extends("cookiecheck")
+@section("cookie-popup")
+    @parent
+@endsection
 <div id="login-form-wrap">
     <img style="width: fit-content" src="{{ asset('storage/logo.png')}}">
     <h2>Login</h2>
@@ -32,6 +36,5 @@
     </div><!--create-account-wrap-->
 </div><!--login-form-wrap-->
 <!-- partial -->
-
 </body>
 </html>
