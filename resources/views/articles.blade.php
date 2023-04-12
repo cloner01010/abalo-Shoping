@@ -16,42 +16,58 @@
 @section("cookie-popup")
     @parent
 @endsection
-<h1>Übersicht</h1>
-<button class="btn"><i class="fa-solid fa-cart-shopping fa-lg"></i></button>
-<form method="get" action={{route('logout')}}>
-    <input class="btn" type="submit" value="Logout">
-</form>
-<form method="get" action={{route('articles')}}>
-    <label for="search">Search: </label><br>
-    <input type="search" placeholder="Find Articles here" name="search" value="{{ request('search') }}">
-    <input class="btn" type="submit" value="search">
-</form>
+<header class="header-container">
+    <h1>Übersicht</h1>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Description</th>
-        <th>Creator</th>
-        <th>Created at</th>
-    </tr>
-    @foreach($articles as $article)
-        @isset($article)
-           <tr>
-               <th>{{$article->id}}</th>
-               <th><img src="{{ asset('storage/articleimages/'.$article->img)}}" alt="Artikel"></th>
-               <th>{{$article->ab_name}}</th>
-               <th>{{$article->ab_price}}€</th>
-               <th>{{$article->ab_description}}</th>
-               <th>{{$article->user_name}}</th>
-               <th>{{$article->ab_createdate}}</th>
-               <th><button class="btn"><i class="fa-solid fa-circle-plus fa-lg"></i></button></th>
-           </tr>
-        @endisset
-    @endforeach
+    <div class="logout">
+        <form method="get" action={{route('logout')}}>
+            <button class="btn" type="submit" value="Logout"><i class="fa-solid fa-right-from-bracket fa-lg"></i></button>
+        </form>
+    </div>
+    <div class="shopping-cart">
+        <button class="btn"><i class="fa-solid fa-cart-shopping fa-lg"></i></button>
+    </div>
+    <div>
+        <form method="get" action={{route('articles')}}>
+            <!--<input type="search" placeholder="Suchen" name="search" value="{{ request('search') }}">-->
 
-</table>
+
+            <input type="search" name="search" class="question" id="nme" required autocomplete="off" value="{{ request('search') }}"/>
+            <label for="nme"><span>Search</span></label>
+            <button class="search-button btn" type="submit" value="search"><i class="fa-brands fa-searchengin fa-xl"></i></button>
+
+        </form>
+    </div>
+
+</header>
+<main>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Creator</th>
+            <th>Created at</th>
+        </tr>
+        @foreach($articles as $article)
+            @isset($article)
+                <tr>
+                    <th>{{$article->id}}</th>
+                    <th><img src="{{ asset('storage/articleimages/'.$article->img)}}" alt="Artikel"></th>
+                    <th>{{$article->ab_name}}</th>
+                    <th>{{$article->ab_price}}€</th>
+                    <th>{{$article->ab_description}}</th>
+                    <th>{{$article->user_name}}</th>
+                    <th>{{$article->ab_createdate}}</th>
+                    <th><button class="btn"><i class="fa-solid fa-circle-plus fa-lg"></i></button></th>
+                </tr>
+            @endisset
+        @endforeach
+
+    </table>
+</main>
+
 </body>
 </html>

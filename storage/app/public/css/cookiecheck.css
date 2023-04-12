@@ -1,0 +1,32 @@
+#cookie-popup {
+ text-align: center;
+ background: #fff;
+ position: fixed;
+ top: 0px;
+ left: 0;
+ right: 0;
+ z-index: 9999;
+ font-size:14px;
+ line-height:20px;
+ padding: 20px;
+ -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+ -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);}
+
+#cookie-popup.hidden {
+    display: none;
+}
+.btn {
+    background-color: gray; /* Blue background */
+    border: none; /* Remove borders */
+    color: black; /* White text */
+    padding: 12px 16px; /* Some padding */
+    margin: 10px;
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: RoyalBlue;
+}
