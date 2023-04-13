@@ -24,9 +24,15 @@ table{
     border-spacing: 30px;
 }
 
-img{
+.article-image{
     height: 120px;
     width: auto;
+
+}
+.logo{
+    height: 150px;
+    width: auto;
+    margin-bottom: 20px;
 }
 .header-container{
 
@@ -38,18 +44,39 @@ img{
 .logout{
     float: right;
 }
+.amount{
+    float: right;
+}
+.cart-container{
+    float: right;
+    display: none;
+    border: 2px solid black;
+    margin: 5px;
+}
+.amount-text{
+    font-size:larger;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+    position: relative;
+    bottom:10px;
+}
 
 /*
 Basic input element using psuedo classes
 */
-
+.header-container{
+    padding: 30px;
+}
+main{
+    padding: 30px;
+}
 html {
     font-family: 'Lora', sans-serif;
     width: 100%;
 }
 
 body {
-    margin: 5% auto 0 auto;
+   /* margin: 5% auto 0 auto;*/
+    padding: 0 20px 20px 20px;
     width: 95%;
 }
 
