@@ -17,7 +17,7 @@
 @section("cookie-popup")
     @parent
 @endsection
-<img class="logo" src="{{asset('storage/logo.png')}}" alt="nopic">
+<div class="logo-container"><img class="logo" src="{{asset('storage/logo.png')}}" alt="nopic"></div>
 <header class="header-container">
     <div class="logout">
         <form method="get" action={{route('logout')}}>
