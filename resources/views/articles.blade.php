@@ -51,10 +51,9 @@
 
 </header>
 <main>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Image</th>
+    <table id="articles-table">
+        <tr id="header-table">
+            <th></th>
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
@@ -64,14 +63,13 @@
         @foreach($articles as $article)
             @isset($article)
                 <tr>
-                    <th>{{$article->id}}</th>
                     <th><img class="article-image" src="{{ asset('storage/articleimages/'.$article->img)}}" alt="Artikel"></th>
                     <th>{{$article->ab_name}}</th>
                     <th>{{$article->ab_price}}€</th>
                     <th>{{$article->ab_description}}</th>
                     <th>{{$article->user_name}}</th>
                     <th>{{$article->ab_createdate}}</th>
-                    <th><button class="btn"><i class="add-btn fa-solid fa-circle-plus fa-lg"></i></button></th>
+                    <th><button class="btn"><i id="{{$article->id}}" class="add-btn fa-solid fa-circle-plus fa-lg"></i></button></th>
                 </tr>
             @endisset
         @endforeach
