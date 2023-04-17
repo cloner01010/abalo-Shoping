@@ -31,6 +31,7 @@
   - Als erstes kommt Chrome, da der Marktanteil deutlich der größte ist und von den meisten Menschen genutzt wird.
   - Danach Safari, da auch wenn Sie auf Desktop nur auf den dritten Platz kommen benutzen fast alle Apple User den Brwoser. Man würde ggf. eine potenzielle Kundensparte verlieren
   - Platz 3 wird vorraussichtlich Edge. Zumal ist Edge tatsächlich beliebter als Firefox und Microsoft wird die KI von ChatGPT bei sich einbauen. Wenn man die Website dementsprechend anpasst, könnte das einiges verändern und ermöglicht neues Potenzial.
+
 ### Aufgabe 4 - Vergleich mit bekanter Programmiersprachen:
 
 **Gemeinsamkeiten von Javascript & PHP:**
