@@ -56,4 +56,4 @@
 | Anwendungsbereiche | JavaScript wird häufig für Frontend-Entwicklung, Benutzerschnittstellen und Interaktionen in Webbrowsern verwendet. | PHP wird häufig für Backend-Entwicklung, serverseitige Logik und Datenbankkommunikation verwendet. |
 | Verbreitung | JavaScript ist eine weit verbreitete Skriptsprache, die von allen gängigen Webbrowsern unterstützt wird. | PHP ist eine der beliebtesten serverseitigen Skriptsprachen und wird von vielen Webservern und Content-Management-Systemen unterstützt. |
 
-Quellen: [Ionos - April 2022](https://www.ionos.de/digitalguide/websites/web-entwicklung/php-vs-javascript/), [PHP vs Javascript Video - August 2021](https://www.youtube.com/watch?v=hZhQyA5cvDs), [ChatGPT - September 2021](https://chat.openai.com/)
+Quellen: [Ionos - April 2022](https://www.ionos.de/digitalguide/websites/web-entwicklung/php-vs-javascript/), [PHP vs Javascript Video - August 2021](https://www.youtube.com/watch?v=hZhQyA5cvDs)

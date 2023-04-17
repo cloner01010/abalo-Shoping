@@ -223,3 +223,50 @@ input.question:invalid ~ input[type="submit"], textarea.question:invalid ~ input
         opacity: 1;
     }
 }
+
+#newarticle-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background-color: #f8f8f8; 
+}
+  
+.newarticle-form {
+    width: 400px; 
+    padding: 20px;
+    background-color: #fff; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px; 
+}
+
+.newarticle-name-label,
+.newarticle-price-label,
+.newarticle-description-label {
+
+}
+
+.newarticle-name-input,
+.newarticle-price-input,
+.newarticle-description-input {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    outline: none;
+}
+  
+.newarticle-submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff; 
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+}
+  
+.newarticle-submit-button:hover {
+    background-color: #0056b3;
+}

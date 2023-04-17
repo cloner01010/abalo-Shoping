@@ -131,3 +131,57 @@ function removeFromArticles(event) {
     item.remove();
 
 }
+document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
+        // Formular-Container 
+        var formContainer = document.createElement("div");
+        formContainer.classList = "newarticle-form";
+
+        // Name-Eingabefeld 
+        var nameLabel = document.createElement("label");
+        nameLabel.textContent = "Name:";
+        nameLabel.className = "newarticle-name-label";
+        var nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.id = "name";
+        nameInput.name = "name";
+        nameInput.className = "newarticle-name-input";
+        nameLabel.appendChild(nameInput);
+        formContainer.appendChild(nameLabel);
+
+        // Preis-Eingabefeld 
+        var priceLabel = document.createElement("label");
+        priceLabel.textContent = "Preis:";
+        priceLabel.classList = "newarticle-price-label"
+        var priceInput = document.createElement("input");
+        priceInput.type = "number";
+        priceInput.id = "price";
+        priceInput.name = "price";
+        priceInput.classList = "newarticle-price-input"
+        priceLabel.appendChild(priceInput);
+        formContainer.appendChild(priceLabel);
+
+        // Beschreibung-Eingabefeld 
+        var descriptionLabel = document.createElement("label");
+        descriptionLabel.textContent = "Beschreibung:";
+        descriptionLabel.classList = "newarticle-description-label";
+        var descriptionInput = document.createElement("textarea");
+        descriptionInput.id = "description";
+        descriptionInput.name = "description";
+        descriptionInput.classList = "newarticle-description-input";
+        descriptionLabel.appendChild(descriptionInput);
+        formContainer.appendChild(descriptionLabel);
+
+        // Speichern-Schaltfläche 
+        var saveButton = document.createElement("button");
+        saveButton.type = "button";
+        saveButton.textContent = "Speichern";
+        saveButton.classList = "newarticle-submit-button";
+        // saveButton.onclick = newArticle();
+        formContainer.appendChild(saveButton);
+
+        document.getElementById("newarticle-main-container").appendChild(formContainer);
+})
+
+const newArticle = () => {
+
+}

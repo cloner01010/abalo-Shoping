@@ -38,4 +38,7 @@ class articleController extends Controller
        }
         return view('articles', ['articles' => $article,'request'=>$request]);
     }
+    public function newarticle() {
+        return view('newarticle');
+    }
 }
