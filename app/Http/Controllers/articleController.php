@@ -41,4 +41,17 @@ class articleController extends Controller
     public function newarticle() {
         return view('newarticle');
     }
+
+    public function store() {
+
+        $new_article = new ab_article();
+        $new_article->ab_name = request('name');
+        $new_article->ab_price = request('price');
+        $new_article->ab_description = request('description');
+        $new_article->ab_creator_id = request('creator');
+        $new_article->ab_createdate = now();
+
+        $new_article->save();
+        return redirect('/');
+    }
 }

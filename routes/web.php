@@ -8,3 +8,4 @@ Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->n
 Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'isloggedin'])->name('haslogin');
 Route::match(['get', 'post'],'/articles', [\App\Http\Controllers\articleController::class, 'index'])->name('articles');
 Route::get('/newarticle', [\App\Http\Controllers\articleController::class, 'newarticle'])->name('newarticle');
+Route::post('/articles', [\App\Http\Controllers\articleController::class, 'store']);

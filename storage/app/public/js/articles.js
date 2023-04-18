@@ -132,56 +132,105 @@ function removeFromArticles(event) {
 
 }
 document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
-        // Formular-Container 
-        var formContainer = document.createElement("div");
-        formContainer.classList = "newarticle-form";
+    // Formular-Container 
+    let formContainer = document.createElement("form");
+    formContainer.classList = "newarticle-form";
+    formContainer.id = "newarticle-form";
+    formContainer.action = "/articles";
+    formContainer.method = "POST";
 
-        // Name-Eingabefeld 
-        var nameLabel = document.createElement("label");
-        nameLabel.textContent = "Name:";
-        nameLabel.className = "newarticle-name-label";
-        var nameInput = document.createElement("input");
-        nameInput.type = "text";
-        nameInput.id = "name";
-        nameInput.name = "name";
-        nameInput.className = "newarticle-name-input";
-        nameLabel.appendChild(nameInput);
-        formContainer.appendChild(nameLabel);
+    // Name-Eingabefeld 
+    let nameLabel = document.createElement("label");
+    nameLabel.textContent = "Name:";
+    nameLabel.className = "newarticle-name-label";
+    let nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.id = "na-name-input";
+    nameInput.name = "name";
+    nameInput.className = "newarticle-name-input";
 
-        // Preis-Eingabefeld 
-        var priceLabel = document.createElement("label");
-        priceLabel.textContent = "Preis:";
-        priceLabel.classList = "newarticle-price-label"
-        var priceInput = document.createElement("input");
-        priceInput.type = "number";
-        priceInput.id = "price";
-        priceInput.name = "price";
-        priceInput.classList = "newarticle-price-input"
-        priceLabel.appendChild(priceInput);
-        formContainer.appendChild(priceLabel);
+    nameLabel.appendChild(nameInput);
+    formContainer.appendChild(nameLabel);
 
-        // Beschreibung-Eingabefeld 
-        var descriptionLabel = document.createElement("label");
-        descriptionLabel.textContent = "Beschreibung:";
-        descriptionLabel.classList = "newarticle-description-label";
-        var descriptionInput = document.createElement("textarea");
-        descriptionInput.id = "description";
-        descriptionInput.name = "description";
-        descriptionInput.classList = "newarticle-description-input";
-        descriptionLabel.appendChild(descriptionInput);
-        formContainer.appendChild(descriptionLabel);
+    // Preis-Eingabefeld 
+    let priceLabel = document.createElement("label");
+    priceLabel.textContent = "Preis:";
+    priceLabel.classList = "newarticle-price-label"
+    let priceInput = document.createElement("input");
+    priceInput.type = "number";
+    priceInput.id = "na-price-input";
+    priceInput.name = "price";
+    priceInput.classList = "newarticle-price-input"
+    priceLabel.appendChild(priceInput);
+    formContainer.appendChild(priceLabel);
 
-        // Speichern-Schaltfläche 
-        var saveButton = document.createElement("button");
-        saveButton.type = "button";
-        saveButton.textContent = "Speichern";
-        saveButton.classList = "newarticle-submit-button";
-        // saveButton.onclick = newArticle();
-        formContainer.appendChild(saveButton);
+    // Select-Eingabefeld
+    let selectElement = document.createElement('select');
+    selectElement.classList = "newarticle-select-input";
+    selectElement.name = "creator";
 
-        document.getElementById("newarticle-main-container").appendChild(formContainer);
+    let option1 = document.createElement('option');
+    option1.value = 5;
+    option1.textContent = 'Creator 5';
+    selectElement.appendChild(option1);
+
+    let option2 = document.createElement('option');
+    option2.value = 6;
+    option2.textContent = 'Creator 6';
+    selectElement.appendChild(option2);
+
+    var option3 = document.createElement('option');
+    option3.value = 7;
+    option3.textContent = 'Creator 7';
+    selectElement.appendChild(option3);
+    
+    formContainer.appendChild(selectElement);
+
+
+    // Beschreibung-Eingabefeld 
+    let descriptionLabel = document.createElement("label");
+    descriptionLabel.textContent = "Beschreibung:";
+    descriptionLabel.classList = "newarticle-description-label";
+    let descriptionInput = document.createElement("textarea");
+    descriptionInput.id = "na-description-input";
+    descriptionInput.name = "description";
+    descriptionInput.classList = "newarticle-description-input";
+    descriptionLabel.appendChild(descriptionInput);
+    formContainer.appendChild(descriptionLabel);
+
+    // Token
+    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+    const tokenField = document.createElement('input');
+    tokenField.type = 'hidden';
+    tokenField.name = '_token';
+    tokenField.value = csrfToken;     
+    formContainer.appendChild(tokenField);
+
+    // Speichern-Schaltfläche 
+    let saveButton = document.createElement("button");
+    saveButton.type = "button";
+    saveButton.textContent = "Speichern";
+    saveButton.classList = "newarticle-submit-button";
+    saveButton.addEventListener("click", function (event) {
+        testSubmit();
+    });
+
+    formContainer.appendChild(saveButton);
+
+    document.getElementById("newarticle-main-container").appendChild(formContainer);
 })
 
-const newArticle = () => {
+const testSubmit = () => {
+    const form = document.getElementById('newarticle-form');
+    const textInput = document.getElementById('na-name-input');
+    const numberInput = document.getElementById('na-price-input');
 
+    if (numberInput.value <= 0) {
+        alert("Der Preis muss größer oder gleich Null sein.");
+        return;
+    } if (textInput.value === '') {
+        alert("Kein Name wurde angegeben")
+        return;
+    }
+    form.submit();
 }
