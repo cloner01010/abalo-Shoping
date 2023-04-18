@@ -1,8 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const menuItems = [
         { label: 'Home', link: "/" },
         { label: 'Kategorien', link: '#' },
-        { label: 'Verkaufen', link: '#' },
+        {
+            label: 'Verkaufen', link: '#',
+            submenu: [
+                { label: 'Neuer Artikel', link: '/newarticle' },
+            ]
+        },
         {
             label: 'Unternehmen',
             link: '#',
