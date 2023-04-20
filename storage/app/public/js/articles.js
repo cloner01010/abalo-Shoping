@@ -132,14 +132,16 @@ function removeFromArticles(event) {
 
 }
 document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
-    // Formular-Container 
+    // Formular-Container
     let formContainer = document.createElement("form");
     formContainer.classList = "newarticle-form";
     formContainer.id = "newarticle-form";
     formContainer.action = "/articles";
     formContainer.method = "POST";
+    formContainer.enctype = 'multipart/form-data';
 
-    // Name-Eingabefeld 
+
+    // Name-Eingabefeld
     let nameLabel = document.createElement("label");
     nameLabel.textContent = "Name:";
     nameLabel.className = "newarticle-name-label";
@@ -152,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
     nameLabel.appendChild(nameInput);
     formContainer.appendChild(nameLabel);
 
-    // Preis-Eingabefeld 
+    // Preis-Eingabefeld
     let priceLabel = document.createElement("label");
     priceLabel.textContent = "Preis:";
     priceLabel.classList = "newarticle-price-label"
@@ -164,30 +166,24 @@ document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
     priceLabel.appendChild(priceInput);
     formContainer.appendChild(priceLabel);
 
-    // Select-Eingabefeld
-    let selectElement = document.createElement('select');
-    selectElement.classList = "newarticle-select-input";
-    selectElement.name = "creator";
-
-    let option1 = document.createElement('option');
-    option1.value = 5;
-    option1.textContent = 'Creator 5';
-    selectElement.appendChild(option1);
-
-    let option2 = document.createElement('option');
-    option2.value = 6;
-    option2.textContent = 'Creator 6';
-    selectElement.appendChild(option2);
-
-    var option3 = document.createElement('option');
-    option3.value = 7;
-    option3.textContent = 'Creator 7';
-    selectElement.appendChild(option3);
-    
-    formContainer.appendChild(selectElement);
 
 
-    // Beschreibung-Eingabefeld 
+    let creatorLable = document.createElement("label");
+    creatorLable.textContent = "Verkäufer:";
+    creatorLable.classList = "newarticle-price-label"
+    let creatorInput = document.createElement("input");
+    creatorInput.type = "text";
+    creatorInput.id = "na-price-input";
+    creatorInput.name = "creator";
+    creatorInput.value=document.getElementById('session_creator').getAttribute('data-creator');
+    creatorInput.classList = "newarticle-price-input";
+    creatorInput.readOnly=true;
+    creatorLable.appendChild(creatorInput);
+    formContainer.appendChild(creatorLable);
+
+
+
+    // Beschreibung-Eingabefeld
     let descriptionLabel = document.createElement("label");
     descriptionLabel.textContent = "Beschreibung:";
     descriptionLabel.classList = "newarticle-description-label";
@@ -198,15 +194,21 @@ document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
     descriptionLabel.appendChild(descriptionInput);
     formContainer.appendChild(descriptionLabel);
 
+    let fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.id = 'picture';
+    fileInput.name = 'picture';
+    formContainer.appendChild(fileInput);
+
     // Token
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
     const tokenField = document.createElement('input');
     tokenField.type = 'hidden';
     tokenField.name = '_token';
-    tokenField.value = csrfToken;     
+    tokenField.value = csrfToken;
     formContainer.appendChild(tokenField);
 
-    // Speichern-Schaltfläche 
+    // Speichern-Schaltfläche
     let saveButton = document.createElement("button");
     saveButton.type = "button";
     saveButton.textContent = "Speichern";

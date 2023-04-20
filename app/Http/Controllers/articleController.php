@@ -23,35 +23,49 @@ class articleController extends Controller
         }else{
             $article=$query->get();
         }
-       try {
-           $file_names=scandir(base_path('public/storage/articleimages/'));
+        try {
+            $file_names=scandir(base_path('public/storage/articleimages/'));
 
-       }catch (\Exception $ex){
+        }catch (\Exception $ex){
             Log::error(__CLASS__.':'.__LINE__.'-'.$ex->getMessage());
-       }
-       foreach ($file_names as $name){
-           foreach ($article as $val){
-               if($name==$val->id.'.jpg'|| $name==$val->id.'.png'){
-                   $val->img=$name;
-               }
-           }
-       }
+        }
+        foreach ($file_names as $name){
+            foreach ($article as $val){
+                if($name==$val->id.'.jpg'|| $name==$val->id.'.png'){
+                    $val->img=$name;
+                }
+            }
+        }
         return view('articles', ['articles' => $article,'request'=>$request]);
     }
     public function newarticle() {
         return view('newarticle');
     }
 
-    public function store() {
+    public function store(Request $request) {
 
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:1',
+            'price' => 'required|numeric|min:0',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ], [
+            'name.required' => 'The name field is required.',
+            'name.min' => 'The name must be at least :min characters.',
+            'price.required' => 'The price field is required.',
+            'price.numeric' => 'The price must be a number.',
+            'price.min' => 'The price must be greater than :min.',
+        ]);
         $new_article = new ab_article();
-        $new_article->ab_name = request('name');
-        $new_article->ab_price = request('price');
+        $new_article->ab_name = $validatedData['name'];
+        $new_article->ab_price =$validatedData['price'];
         $new_article->ab_description = request('description');
-        $new_article->ab_creator_id = request('creator');
+        $new_article->ab_creator_id = session('abalo_id');
         $new_article->ab_createdate = now();
-
         $new_article->save();
+        $fileFormat = $request->file('picture')->getClientOriginalExtension();
+        $picturePath = $request->file('picture')->storeAs('public/articleimages', $new_article->id .'.'.$fileFormat);
+        //TODO:
+        //store $picturePath in DB
         return redirect('/');
     }
 }

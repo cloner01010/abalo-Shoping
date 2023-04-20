@@ -28,14 +28,15 @@ class AuthController extends Controller
             if(Hash::check($password,$user->ab_password)){
                 $request->session()->put('abalo_user', $user->ab_name);
                 $request->session()->put('abalo_mail', $user->ab_mail);
+                $request->session()->put('abalo_id', $user->id);
                 $request->session()->put('abalo_time', time());
 
                 return redirect()->route('haslogin');
-       }else{
-              $r["auth"]=false;
-              $message='Deine E-Mail-Adresse oder das Passwort war nicht korrekt. Bitte versuche es noch einmal.';
-              return view('login',['user'=>$r,'message'=>$message]);
-           }
+            }else{
+                $r["auth"]=false;
+                $message='Deine E-Mail-Adresse oder das Passwort war nicht korrekt. Bitte versuche es noch einmal.';
+                return view('login',['user'=>$r,'message'=>$message]);
+            }
 
         }else{
             $r["auth"]=false;
@@ -55,16 +56,16 @@ class AuthController extends Controller
     public function isLoggedIn(Request $request)
     {
         if ($request->session()->has('abalo_user')) {
-             $r["user"] = $request->session()->get('abalo_user');
-             $r["time"] = $request->session()->get('abalo_time');
-             $r["mail"] = $request->session()->get('abalo_mail');
-             $r["auth"] = true;
+            $r["user"] = $request->session()->get('abalo_user');
+            $r["time"] = $request->session()->get('abalo_time');
+            $r["mail"] = $request->session()->get('abalo_mail');
+            $r["auth"] = true;
             return redirect('/articles');
         }
-         else{
-             $r["auth"]=false;
-             return view('login',['user'=>$r]);
-         }
+        else{
+            $r["auth"]=false;
+            return view('login',['user'=>$r]);
+        }
         //return response()->json($r);
     }
 
