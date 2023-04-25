@@ -22,6 +22,7 @@ return new class extends Migration
             verkaufen möchte');
             $table->foreign('ab_creator_id')->references('id')->on('ab_user');
             $table->timestamp('ab_createdate')->comment('Zeitpunkt der Erstellung des Artikels');
+            $table->string('ab_file_path')->nullable()->comment('Foto');
             $table->timestamps();
         });
     }

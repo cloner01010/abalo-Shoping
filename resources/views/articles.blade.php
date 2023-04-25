@@ -30,7 +30,7 @@
         @foreach($articles as $article)
             @isset($article)
                 <tr>
-                    <th><img class="article-image" src="{{ asset('storage/articleimages/'.$article->img)}}" alt="Artikel"></th>
+                    <th><img class="article-image" src="{{ asset($article->ab_file_path)}}" alt="Artikel"></th>
                     <th>{{$article->ab_name}}</th>
                     <th>{{$article->ab_price}}€</th>
                     <th>{{$article->ab_description}}</th>

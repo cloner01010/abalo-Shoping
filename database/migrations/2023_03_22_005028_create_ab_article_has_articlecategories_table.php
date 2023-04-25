@@ -14,8 +14,9 @@ return new class extends Migration{
     {
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->bigIncrements('id')->comment('Primärschlüssel');
-           //not unique kombi unique $table->bigInteger('ab_articlecategory_id')->unique()->unsigned()->comment('Referenz auf eine Artikelkategorie');
-            $table->bigInteger('ab_article_id')->unique()->unsigned()->comment('Referenz auf einen Artikel');
+            $table->bigInteger('ab_articlecategory_id')->unsigned()->comment('Referenz auf eine Artikelkategorie');
+            $table->bigInteger('ab_article_id')->unsigned()->comment('Referenz auf einen Artikel');
+            $table->unique(['ab_articlecategory_id', 'ab_article_id']);
             $table->foreign('ab_articlecategory_id')->references('id')->on('ab_articlecategory');
             $table->foreign('ab_article_id')->references('id')->on('ab_article');
             $table->timestamps();

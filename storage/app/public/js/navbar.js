@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const menuItems = [
+    let menuItems = [
         { label: 'Home', link: "/" },
         { label: 'Kategorien', link: '#' },
         {
@@ -17,11 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
             ]
         }
     ];
-
+    let kategorien=document.getElementById('data-kategorien').getAttribute('data-kategorien');
+    kategorien=JSON.parse(kategorien);
+    let kategorienMenuItem = menuItems.find(item => item.label === "Kategorien");
+    kategorienMenuItem.submenu = kategorien.map(item => ({ label: item.ab_name, link: '#' }));
     const navbar = document.getElementById('navbar');
     const menuList = document.createElement('ul');
     menuList.classList.add('menu-list');
-
     menuItems.forEach(item => {
         const menuItem = document.createElement('li');
         const menuItemLink = document.createElement('a');

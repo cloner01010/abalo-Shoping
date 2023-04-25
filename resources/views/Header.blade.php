@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ asset('storage/css/navbar.css') }}">
 </head>
 <header class="header-container" id="header">
+    <div id="data-kategorien" data-kategorien="{{ $kategorien }}"></div>
     <nav class="navbar" id="navbar">
     </nav>
     <div class="logout">

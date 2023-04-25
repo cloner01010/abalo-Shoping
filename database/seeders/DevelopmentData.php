@@ -22,6 +22,12 @@ class DevelopmentData extends Seeder
         ab_user::query()->truncate();
         ab_article::query()->truncate();
         ab_articlecategory::query()->truncate();
+        try {
+            $file_names=scandir(base_path('public/storage/articleimages/'));
+
+        }catch (\Exception $ex){
+            Log::error(__CLASS__.':'.__LINE__.'-'.$ex->getMessage());
+        }
         $csv_dateien=['user','articles','articlecategory'];
         foreach ($csv_dateien as $csv_datei){
             try {
@@ -29,6 +35,8 @@ class DevelopmentData extends Seeder
             }catch (\Exception $ex){
                 Log::error(__CLASS__.'-'.__LINE__.':'.$ex->getMessage());
             }
+
+
             $firstline = true;
             while (($data = fgetcsv($csv_input, 2000, ";")) !== FALSE) {
                 if (!$firstline) {
@@ -41,12 +49,19 @@ class DevelopmentData extends Seeder
                            $new_user->save();
                            break;
                        case 'articles':
+                           $foto_name='';
+                           foreach ($file_names as $name){
+                               if($name==$data[0].'.jpg'|| $name==$data[0].'.png'){
+                                   $foto_name=$name;
+                               }
+                           }
                             $article=new ab_article;
                             $article->ab_name=$data['1'];
                             $article->ab_price=intval($data['2']);
                             $article->ab_description=$data['3'];
                             $article->ab_creator_id=intval($data['4']);
                             $article->ab_createdate= $data['5'];
+                            $article->ab_file_path='storage/articleimages/'.$foto_name;
                             $article->save();
 
                            break;
