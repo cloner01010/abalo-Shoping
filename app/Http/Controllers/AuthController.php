@@ -17,6 +17,7 @@ class AuthController extends Controller
         return view('login');
     }
     public function login(Request $request) {
+        Log::info('Login');
        // if($request->has('email')&& $request->has('password')){
 
             $email=$request->input('email');
@@ -55,6 +56,7 @@ class AuthController extends Controller
     public function isLoggedIn(Request $request)
     {
         if ($request->session()->has('abalo_user')) {
+            Log::info("Session is already logged in");
             $r["user"] = $request->session()->get('abalo_user');
             $r["time"] = $request->session()->get('abalo_time');
             $r["mail"] = $request->session()->get('abalo_mail');
@@ -63,6 +65,7 @@ class AuthController extends Controller
         }
         else{
             $r["auth"]=false;
+            Log::info("session not ready");
             return view('login',['user'=>$r]);
         }
         //return response()->json($r);

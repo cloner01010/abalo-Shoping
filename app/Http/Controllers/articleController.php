@@ -42,7 +42,8 @@ class articleController extends Controller
             'price.numeric' => 'The price must be a number.',
             'price.min' => 'The price must be greater than :min.',
         ]);
-        if($request->file('pictures') !== null) {
+
+        if($request->file('picture') !== null) {
             $picturePath = $request->file('picture')->store('public/articleimages');
         }else{
             $picturePath='public/articleimages/no-photo.png';
