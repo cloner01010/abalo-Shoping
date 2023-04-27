@@ -17,13 +17,12 @@ class AuthController extends Controller
         return view('login');
     }
     public function login(Request $request) {
-        if($request->has('email')&& $request->has('password')){
+       // if($request->has('email')&& $request->has('password')){
 
             $email=$request->input('email');
             $password=$request->input('password');
-        }
+        //}
         $user=ab_user::query()->where('ab_mail','=',$email)->orWhere('ab_name','=',$email)->first();
-
         if(isset($user)){
             if(Hash::check($password,$user->ab_password)){
                 $request->session()->put('abalo_user', $user->ab_name);
