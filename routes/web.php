@@ -8,3 +8,12 @@ Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'islogged
 Route::match(['get', 'post'],'/articles', [\App\Http\Controllers\articleController::class, 'index'])->name('articles');
 Route::get('/newarticle', [\App\Http\Controllers\articleController::class, 'newarticle'])->name('newarticle');
 Route::post('/articles', [\App\Http\Controllers\articleController::class, 'store']);
+
+
+Route::get('/ajax-examples/1', function () {
+    return view('ajax-examples/3-ajax1-static');
+});
+
+Route::get('/ajax-examples/2', function () {
+    return view('ajax-examples/3-ajax2-periodic');
+});
