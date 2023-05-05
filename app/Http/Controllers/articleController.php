@@ -28,6 +28,19 @@ class articleController extends Controller
         }
         return view('articles', ['articles' => $article,'request'=>$request]);
     }
+    public function index_api(Request $request){
+        $article_name=$request->get('search');
+        $query=ab_article::query()
+            ->leftJoin('ab_user as user','user.id','=','ab_article.ab_creator_id')
+            ->select('ab_article.*','user.ab_name as ab_creator_name')
+            ->orderBy('ab_article.ab_name');
+
+        $article=$query->where('ab_article.ab_name','ilike','%'.$article_name.'%')
+                ->get();
+        return response()->json(array('articles' => $article));
+
+    }
+
     public function newarticle() {
         return view('newarticle');
     }

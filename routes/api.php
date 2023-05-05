@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/articles',[\App\Http\Controllers\articleController::class,'index_api'])->name('articles_api');
+Route::post('/shoppingcart',[\App\Http\Controllers\ShoppingcartController::class,'store_api'])->name('shoppingcart_api');
+Route::delete('/shoppingcart/{shoppingcartid}/articles/{articleId}',[\App\Http\Controllers\ShoppingcartController::class,'destroy_api']);
