@@ -214,7 +214,9 @@ document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
     saveButton.textContent = "Speichern";
     saveButton.classList = "newarticle-submit-button";
     saveButton.addEventListener("click", function (event) {
-        testSubmit();
+        event.preventDefault();
+        testSubmit(csrfToken);
+        return false;
     });
 
     formContainer.appendChild(saveButton);
@@ -222,17 +224,58 @@ document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
     document.getElementById("newarticle-main-container").appendChild(formContainer);
 })
 
-const testSubmit = () => {
+const testSubmit = (csrfToken) => {
     const form = document.getElementById('newarticle-form');
     const textInput = document.getElementById('na-name-input');
     const numberInput = document.getElementById('na-price-input');
 
-    if (numberInput.value <= 0) {
-        alert("Der Preis muss größer oder gleich Null sein.");
-        return;
-    } if (textInput.value === '') {
-        alert("Kein Name wurde angegeben")
-        return;
-    }
-    form.submit();
+  //  if (numberInput.value <= 0) {
+  //      alert("Der Preis muss größer oder gleich Null sein.");
+  //      return;
+  //  } if (textInput.value === '') {
+  //      alert("Kein Name wurde angegeben")
+  //      return;
+  //  }
+    let xhr = new XMLHttpRequest();
+
+    // Set up the request
+    xhr.open("POST", form.action);
+    xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+
+    // Set up a callback function to handle the response
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+               const response = JSON.parse(xhr.responseText);
+                if (response.errors) {
+                    // There were validation errors
+                    const nameError = response.errors.name ? response.errors.name : '';
+                    const priceError = response.errors.price ? response.errors.price : '';
+                    const descriptionError = response.errors.description ? response.errors.description : '';
+                    let errorString = '';
+                    if (nameError) {
+                        errorString += nameError.join(', ') + ' ';
+                    }
+
+                    if (priceError) {
+                        errorString += priceError.join(', ') + ' ';
+                    }
+
+                    if (descriptionError) {
+                        errorString += descriptionError.join(', ');
+                    }
+                    alert(errorString);
+                } else {
+                    // The data was submitted successfully
+                    alert('Artikel wurde erfolgreich hinzugefügt.');}
+            } else {
+                // There was an error, handle it appropriately
+                alert("Problem with "+xhr.statusText)
+                console.error("Problem with "+xhr.statusText);
+            }
+        }
+    };
+    const formData =new FormData(form);
+    // Send the form data
+    xhr.send(formData);
 }
