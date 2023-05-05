@@ -57,3 +57,36 @@
 | Verbreitung | JavaScript ist eine weit verbreitete Skriptsprache, die von allen gängigen Webbrowsern unterstützt wird. | PHP ist eine der beliebtesten serverseitigen Skriptsprachen und wird von vielen Webservern und Content-Management-Systemen unterstützt. |
 
 Quellen: [Ionos - April 2022](https://www.ionos.de/digitalguide/websites/web-entwicklung/php-vs-javascript/), [PHP vs Javascript Video - August 2021](https://www.youtube.com/watch?v=hZhQyA5cvDs)
+
+<hr>
+
+## Praktikum 3
+### Aufgabe 5 - neueste Technologien
+
+- JavaScriptCore:
+  - JavaScriptCore ist die JavaScript-Engine, die von Apple für Safari und andere Apple-Produkte entwickelt wurde
+- V8:
+  - V8 ist eine von Google entwickelte JavaScript-Engine, die in erster Linie für die Ausführung von JavaScript in der Chrome-Webbrowserumgebung entwickelt wurde.
+- SpiderMonkey:
+  - SpiderMonkey ist eine von Mozilla entwickelte JavaScript-Engine, die in erster Linie für den Mozilla Firefox Webbrowser entwickelt wurde. Sie gilt als erste jemals entwickelte JavaScriptEngine.
+
+Alle drei Engines sind jeweils OpenSource und basieren auf dem ECMAScript (Javascript).
+Quellen: 
+- [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore)
+- [V8](https://v8.dev/)
+- [SpiderMonkey](https://spidermonkey.dev/)
+
+| Sprachkonstrukt       | JavaScriptCore | V8      | SpiderMonkey |
+| --------------------- | -------------- | ------- | ------------ |
+| Set.prototype.*       | ✅            | ✅      |     ✅      |
+| Static Blocks         | ✅            | ✅      | ✅ (ab ES6) |
+| Array.prototype.flat  | ✅            | ✅      | ✅          |
+| Array.prototype.group | ✅            | ❌      | ❌          |
+| Temporal              | ❌            | ❌      | ❌          |
+
+Quellen: [CanIUse.com](https://caniuse.com/), [MDN.org](https://developer.mozilla.org/en-US/)
+
+- Grundsätzlich sollten Sprachkonstrukte vermieden werden, die nicht browserübergreifend für eine allgemeine Programmierung geeignet sind (die letzten beiden).
+- [setPrototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf) ermöglicht es die Eigenschaften von einer Klasse o.ä. zu erben und duese zu manipulieren. Das erbende Objekt verliert alle Eigenschaften und Methoden des alten Prototyps, die nicht im neuen definiert sind. Die Verwendung wird nicht empfohlen, da dies schwerwiegende Nebenwirkungen haben kann. Bspw. die Verletzung der Semantik.
+- [staticBlocks](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks) Ermöglicht es statischen Code in einer Klasse zu definieren. Sinnvoll zu verwenden, wenn die jeweilige Klasse einen gewissen Wert immer haben soll.
+- [Array.prototype.flat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) Ermöglicht es verschatelte Arrays in ein flaches Array zu konvertieren. Erscheint durchaus sinnvoll, wenn es so einen Anwendungsfall gibt.

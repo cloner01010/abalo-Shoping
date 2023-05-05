@@ -4,7 +4,33 @@
 </head>
 <header class="header-container" id="header">
     <div id="data-kategorien" data-kategorien="{{ $kategorien }}"></div>
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar">   
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const kategorienData = JSON.parse(document.getElementById('data-kategorien').getAttribute('data-kategorien'));
+                const menuItems = [
+                    { label: 'Home', link: "/" },
+                    { label: 'Kategorien', link: '#'},
+                    {
+                        label: 'Verkaufen', link: '#',
+                        submenu: [
+                            { label: 'Neuer Artikel', link: '/newarticle' },
+                        ]
+                    },
+                    {
+                        label: 'Unternehmen',
+                        link: '#',
+                        submenu: [
+                            { label: 'Philosophie', link: '#' },
+                            { label: 'Karriere', link: '#' }
+                        ]
+                    }
+                ];
+                const nav = new Navigation(menuItems);
+                nav.setKategorien(kategorienData);
+                nav.render('navbar');
+            });
+        </script>
     </nav>
     <div class="logout">
         <form method="get" action="{{ route('logout') }}">
