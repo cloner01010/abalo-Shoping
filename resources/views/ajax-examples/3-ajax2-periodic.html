@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Beispiel 3-2</title>
+</head>
+
+<body>
+    <h1>AJAX Example 2</h1>
+    <p id="message"></p>
+
+    <script>
+        const updateMessage = () => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    document.getElementById("message").innerText = response.message;
+                }
+            }
+            xhr.open("GET", "/static/message.json");
+            xhr.send();
+        }
+
+        setInterval(updateMessage, 3000);
+    </script>
+</body>
+
+</html>
