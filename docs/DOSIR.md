@@ -90,3 +90,27 @@ Quellen: [CanIUse.com](https://caniuse.com/), [MDN.org](https://developer.mozill
 - [setPrototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf) ermöglicht es die Eigenschaften von einer Klasse o.ä. zu erben und duese zu manipulieren. Das erbende Objekt verliert alle Eigenschaften und Methoden des alten Prototyps, die nicht im neuen definiert sind. Die Verwendung wird nicht empfohlen, da dies schwerwiegende Nebenwirkungen haben kann. Bspw. die Verletzung der Semantik.
 - [staticBlocks](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks) Ermöglicht es statischen Code in einer Klasse zu definieren. Sinnvoll zu verwenden, wenn die jeweilige Klasse einen gewissen Wert immer haben soll.
 - [Array.prototype.flat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) Ermöglicht es verschatelte Arrays in ein flaches Array zu konvertieren. Erscheint durchaus sinnvoll, wenn es so einen Anwendungsfall gibt.
+
+### Aufgabe 6 - Analyse Webservices
+
+- Spotify API:
+  - Die Spotify API ist eine Schnittstelle, die von Spotify bereitgestellt wird, um Entwicklern Zugriff auf verschiedene Funktionen und Daten von Spotify zu ermöglichen. Mit der Spotify API können Entwickler auf Musikdatenbanken zugreifen, Musik suchen, Wiedergabelisten erstellen, Songs abspielen und vieles mehr. Entwickler können die API nutzen, um Anwendungen zu erstellen, die mit Spotify interagieren, wie zum Beispiel Musik-Streaming-Apps, Wiedergabelisten-Manager oder Analysetools für Musikdaten.
+  - Die Spotify API folgt den grundlegenden Prinzipien der REST-Architektur:
+    - Ressourcenbasierte URL-Struktur
+    - Einheitliche Schnittstelle
+    - Zustandslosigkeit
+    - Client-Server Aufteilung
+  - Level 2 Sie verwendet verschiedene HTTP-Methoden wie GET, POST, PUT und DELETE, um Operationen auf Ressourcen auszuführen.
+  - Die Version wird als Präfix in der API-URL angegeben, um sicherzustellen, dass Anfragen an eine bestimmte Version der API gerichtet werden.
+  - Bsp: `https://api.spotify.com/v1/`
+
+- Google Maps API: 
+  - Die Google Maps API ermöglicht die Integration interaktiver Karten und Standortinformationen in Anwendungen. Entwickler können damit Karten anzeigen, Standorte suchen, Routen planen und viele andere Funktionen nutzen.
+  - Die Google Maps API folgt den grundlegenden Prinzipien der REST-Architektur:
+    - Ressourcenbasierte URL-Struktur
+    - Einheitliche Schnittstelle
+    - Zustandslosigkeit
+    - Client-Server Aufteilung
+  - Die Google Maps API erfüllt wahrscheinlich die Anforderungen von Level 2, da sie verschiedene HTTP-Methoden wie GET, POST, PUT und DELETE verwendet, um Operationen auf Ressourcen auszuführen.
+  - Die Versionsnummer wird als Teil der API-URL angegeben
+  - ``https://maps.googleapis.com/maps/api/{version}/{resource}``

@@ -53,7 +53,6 @@ function addCartItem(event) {
                     let cart_count = document.getElementsByClassName('amount-text');
                     cart_count[0].innerHTML = articlesInCart.toString();
                     let article = null;
-                    //console.log(articles);
                     for (let i = 0; i < articles.length; i++) {
                         if (articles[i].id === event.target.id) {
                             article = articles[i];
