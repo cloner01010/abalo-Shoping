@@ -188,12 +188,13 @@ function removeFromArticles(event) {
     item.remove();
 
 }
+
 document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
     // Formular-Container
     let formContainer = document.createElement("form");
     formContainer.classList = "newarticle-form";
     formContainer.id = "newarticle-form";
-    formContainer.action = "/articles";
+    formContainer.action = "/api/articles";
     formContainer.method = "POST";
     formContainer.enctype = 'multipart/form-data';
 
@@ -267,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function createNewArticleForm() {
 
     // Speichern-Schaltfläche
     let saveButton = document.createElement("button");
-    saveButton.type = "button";
+    saveButton.type = "submit";
     saveButton.textContent = "Speichern";
     saveButton.classList = "newarticle-submit-button";
     saveButton.addEventListener("click", function (event) {
@@ -286,13 +287,6 @@ const testSubmit = (csrfToken) => {
     const textInput = document.getElementById('na-name-input');
     const numberInput = document.getElementById('na-price-input');
 
-  //  if (numberInput.value <= 0) {
-  //      alert("Der Preis muss größer oder gleich Null sein.");
-  //      return;
-  //  } if (textInput.value === '') {
-  //      alert("Kein Name wurde angegeben")
-  //      return;
-  //  }
     let xhr = new XMLHttpRequest();
 
     // Set up the request
@@ -324,7 +318,9 @@ const testSubmit = (csrfToken) => {
                     alert(errorString);
                 } else {
                     // The data was submitted successfully
-                    alert('Artikel wurde erfolgreich hinzugefügt.');}
+                    alert('Artikel wurde erfolgreich hinzugefügt. ID: ' + response.id);
+                    console.log(response)
+                }
             } else {
                 // There was an error, handle it appropriately
                 alert("Problem with "+xhr.statusText)
