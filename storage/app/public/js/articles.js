@@ -105,7 +105,7 @@ function addCartItem(event) {
                 }
             } else {
                 // There was an error, handle it appropriately
-                alert("Problem with "+xhr.statusText)
+                alert("Problem with "+xhr.response)
                 console.error("Problem with "+xhr.statusText);
             }
         }

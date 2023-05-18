@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\ab_shoppingcart;
 use App\Models\ab_shoppingcart_item;
 use Illuminate\Http\Request;
@@ -34,8 +32,6 @@ class ShoppingcartController extends Controller
         }else{
             return response()->json(['errors' => 'Artikel nicht verfügbar.']);
         }
-
-
     }
 
     public function destroy_api($shoppingcartid, $articleId){
