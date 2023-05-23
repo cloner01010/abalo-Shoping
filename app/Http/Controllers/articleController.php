@@ -15,13 +15,26 @@ class articleController extends Controller
     {
         @parent::__construct();
     }
+    public function newsite(){
+        return view('newsite');
+    }
     public function index(Request $request)
     {
         $article_name = $request->get('search');
         $query = ab_article::query()
             ->leftJoin('ab_user as user', 'user.id', '=', 'ab_article.ab_creator_id')
-            ->select('ab_article.*', 'user.ab_name as user_name')
-            ->orderBy('ab_article.ab_createdate', 'desc');
+            ->leftJoin('ab_shoppingcart_item as cart-item',function ($join){
+                $join->on('cart-item.ab_article_id', '=', 'ab_article.id');
+            })
+            ->whereNull('cart-item.id')
+
+            ->select(
+                'ab_article.*',
+                'user.ab_name as user_name',
+
+            )
+            ->orderBy('ab_article.id');
+
         if (isset($article_name)) {
             $article = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%')
                 ->get();
@@ -35,8 +48,17 @@ class articleController extends Controller
         $article_name = $request->get('search');
         $query = ab_article::query()
             ->leftJoin('ab_user as user', 'user.id', '=', 'ab_article.ab_creator_id')
-            ->select('ab_article.*', 'user.ab_name as ab_creator_name')
-            ->orderBy('ab_article.ab_name');
+            ->leftJoin('ab_shoppingcart_item as cart-item',function ($join){
+                $join->on('cart-item.ab_article_id', '=', 'ab_article.id');
+            })
+            ->whereNull('cart-item.id')
+
+            ->select(
+                'ab_article.*',
+                'user.ab_name as user_name',
+
+            )
+            ->orderBy('ab_article.id');
 
         $article = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%')
             ->get();

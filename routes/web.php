@@ -10,7 +10,7 @@ Route::match(['get', 'post'], '/articles', [\App\Http\Controllers\articleControl
 Route::get('/newarticle', [\App\Http\Controllers\articleController::class, 'newarticle'])->name('newarticle');
 Route::post('/articles', [\App\Http\Controllers\articleController::class, 'store']);
 
-
+Route::get('/newsite',[\App\Http\Controllers\articleController::class, 'newsite'])->name('newsite');
 Route::get('/ajax-examples/1', function () {
     return view('ajax-examples/3-ajax1-static');
 });

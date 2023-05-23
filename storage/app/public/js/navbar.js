@@ -25,9 +25,7 @@ class Navigation {
         this.items = items;
         this.kategorien = [];
     }
-    static {
-        // noch umbauen
-    }
+
 
     setKategorien(kategorien) {
         this.kategorien = kategorien;
@@ -78,3 +76,5 @@ class Navigation {
         targetElement.appendChild(menuList);
     }
 }
+
+

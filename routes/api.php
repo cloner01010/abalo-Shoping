@@ -19,3 +19,5 @@ Route::post('/shoppingcart',[\App\Http\Controllers\ShoppingcartController::class
 Route::delete('/shoppingcart/{shoppingcartid}/articles/{articleId}',[\App\Http\Controllers\ShoppingcartController::class,'destroy_api']);
 Route::post('/articles',[\App\Http\Controllers\articleController::class,'store']);
 
+Route::get('/shoppingcart',[\App\Http\Controllers\ShoppingcartController::class,'index_api'])->name('shoppingcart_index_api');
+Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index_api'])->name('category_index_api');

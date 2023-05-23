@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="{{ asset('storage/css/articles.css') }}">
     <script src="https://kit.fontawesome.com/87db36f807.js" crossorigin="anonymous"></script>
     <script src="{{asset('storage/js/articles.js')}}" defer></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
 </head>
 <body>
+
 @extends("cookiecheck")
 @section("cookie-popup")
     @parent

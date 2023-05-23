@@ -4,12 +4,13 @@
 </head>
 <header class="header-container" id="header">
     <div id="data-kategorien" data-kategorien="{{ $kategorien }}"></div>
-    <nav class="navbar" id="navbar">   
+    <nav class="navbar" id="navbar">
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const kategorienData = JSON.parse(document.getElementById('data-kategorien').getAttribute('data-kategorien'));
                 const menuItems = [
                     { label: 'Home', link: "/" },
+                    {label: 'Neuer Einstieg', link: '/newsite'},
                     { label: 'Kategorien', link: '#'},
                     {
                         label: 'Verkaufen', link: '#',

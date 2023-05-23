@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\ab_article;
 use App\Models\ab_shoppingcart;
 use App\Models\ab_shoppingcart_item;
 use Illuminate\Http\Request;
@@ -8,6 +9,15 @@ use Illuminate\Support\Facades\Log;
 class ShoppingcartController extends Controller
 {
     //
+    public function index_api(){
+        $query = ab_shoppingcart::query()
+            ->where('ab_shoppingcart.ab_creator_id','=',session('abalo_id'))
+            ->join('ab_shoppingcart_item as cart_item','cart_item.ab_shoppingcart_id','=','ab_shoppingcart.id')
+            ->join('ab_article as article','article.id','=','cart_item.ab_article_id')
+            ->select('article.*','cart_item.ab_createdate as date','ab_shoppingcart.id as shoppingcartId')
+            ->orderBy('cart_item.ab_createdate','desc');
+        return response()->json(array('cart-items'=>$query->get()));
+    }
     public function store_api(Request $request){
         $shoppingcart = ab_shoppingcart::query()->where('ab_creator_id','=',session('abalo_id'))->get();
         $shoppingcart_id=$shoppingcart->value('id');
