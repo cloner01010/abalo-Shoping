@@ -6,7 +6,9 @@
         <div class="search-container">
             <input type="text" placeholder="Search..." class="search-input">
             <button class="search-button btn" type="submit" value="search">
-                <i class="fa-brands fa-searchengin fa-xl"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
             </button>
         </div>
         <div class="pagination">
@@ -28,7 +30,11 @@
                 <th>{{article.ab_description}}</th>
                 <th>{{article.user_name}}</th>
                 <th>{{article.ab_createdate}}</th>
-                <th><button @click="addCartItem" :id="article.id" class="btn"><i :id="article.id" class="add-btn fa-solid fa-circle-plus fa-xl"></i></button></th>
+                <th><button @click="addCartItem" :id="article.id" class="btn add-btn">
+                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="add-btn bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+                    </svg>
+                </button></th>
             </tr>
 
 
@@ -116,6 +122,15 @@ export default {
     cursor: pointer; /* Mouse pointer on hover */
     border-radius: 25px;
 }
+.add-btn {
+    background: none;
+    display: inline-flex; /* Ensures the button only takes the necessary width */
+    align-items: center; /* Aligns the icon vertically in the button */
+    padding: 0; /* Removes any default padding */
+    border: none; /* Removes any default border */
+    cursor: pointer; /* Adds cursor pointer on hover */
+    border-radius: 25px;
+}
 .btn:hover {
     background-color: RoyalBlue;
 }
@@ -178,7 +193,7 @@ table{
 
     position: absolute;
     top: 0;
-    right: 40px;
+    right: 50px;
 
 }
 
