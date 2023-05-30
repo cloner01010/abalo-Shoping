@@ -114,3 +114,12 @@ Quellen: [CanIUse.com](https://caniuse.com/), [MDN.org](https://developer.mozill
   - Die Google Maps API erfüllt wahrscheinlich die Anforderungen von Level 2, da sie verschiedene HTTP-Methoden wie GET, POST, PUT und DELETE verwendet, um Operationen auf Ressourcen auszuführen.
   - Die Versionsnummer wird als Teil der API-URL angegeben
   - ``https://maps.googleapis.com/maps/api/{version}/{resource}``
+
+<hr>
+
+## Praktikum 4
+### Aufgabe 1 - Vue 3 Snippets
+
+1) Effiziente Entwicklung: Vorgefertigten Code Snippets. Somit kann häufig verwendeter Code schneller eingefügt werden
+2) Code-Vervollständigung: Verbesserte Code-Vervollständigung wärend des Coden
+3) Zeitersparnis und Fehlervermeidung: Durch die SNippets kann Code einfach wiederverwendet werden, was Fehler beim codieren vermeidet
