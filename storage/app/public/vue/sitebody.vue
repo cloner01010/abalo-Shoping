@@ -1,73 +1,85 @@
 <template>
-    <div class="shopping-cart">
-        <shopping-cart-popup @remove-item="loadData"></shopping-cart-popup>
-    </div>
-    <main>
-        <div class="search-container">
-            <input type="text" placeholder="Search..." class="search-input">
-            <button class="search-button btn" type="submit" value="search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </button>
+    <span v-if="showImprint">
+        <imprint></imprint>
+    </span>
+    <span v-else>
+        <div class="shopping-cart">
+            <shopping-cart-popup @remove-item="loadData"></shopping-cart-popup>
         </div>
-        <table id="articles-table">
-            <tr id="header-table">
-                <th></th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Creator</th>
-                <th>Created at</th>
-            </tr>
-            <tr v-for="article in articles['articles']" :key="article.id">
-                <th><img class="article-image" :src="article.ab_file_path" alt="Artikel"></th>
-                <th>{{article.ab_name}}</th>
-                <th>{{article.ab_price}}€</th>
-                <th>{{article.ab_description}}</th>
-                <th>{{article.user_name}}</th>
-                <th>{{article.ab_createdate}}</th>
-                <th><button @click="addCartItem" :id="article.id" class="btn add-btn">
-                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="add-btn bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+        <main v-show="!showImprint">
+
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-input">
+                <button class="search-button btn" type="submit" value="search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>
-                </button></th>
-            </tr>
+                </button>
+            </div>
+            <table id="articles-table">
+                <tr id="header-table">
+                    <th></th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Creator</th>
+                    <th>Created at</th>
+                </tr>
+                <tr v-for="article in articles['articles']" :key="article.id">
+                    <th><img class="article-image" :src="article.ab_file_path" alt="Artikel"></th>
+                    <th>{{ article.ab_name }}</th>
+                    <th>{{ article.ab_price }}€</th>
+                    <th>{{ article.ab_description }}</th>
+                    <th>{{ article.user_name }}</th>
+                    <th>{{ article.ab_createdate }}</th>
+                    <th><button @click="addCartItem" :id="article.id" class="btn add-btn">
+                            <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                fill="currentColor" class="add-btn bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                            </svg>
+                        </button></th>
+                </tr>
 
 
-        </table>
-    </main>
+            </table>
+        </main>
+    </span>
 </template>
 
 <script>
 
 import ShoppingCartPopup from "./shopping-cart.vue";
+import Imprint from "./imprint.vue";
 
 export default {
-
+    props: {
+        showImprint: Boolean
+    },
     data() {
         return {
-            articles:[],
-
+            articles: [],
         };
     },
     components: {
         ShoppingCartPopup,
+        Imprint,
     },
     created() {
         this.loadData();
-
     },
-    methods:{
-        loadData(){
+    methods: {
+        loadData() {
             const self = this;
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '/api/articles');
             xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function(){
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
-                        self.articles=JSON.parse(xhr.responseText);
+                        self.articles = JSON.parse(xhr.responseText);
 
                     }
                 }
@@ -102,36 +114,47 @@ export default {
 </script>
 
 <style scoped>
-
-.btn{
-    background-color: white; /* Blue background */
-    border: none; /* Remove borders */
+.btn {
+    background-color: white;
+    /* Blue background */
+    border: none;
+    /* Remove borders */
     width: fit-content;
     padding: 0px 10px;
     margin: 10px;
-    cursor: pointer; /* Mouse pointer on hover */
+    cursor: pointer;
+    /* Mouse pointer on hover */
     border-radius: 25px;
 }
+
 .add-btn {
     background: none;
-    display: inline-flex; /* Ensures the button only takes the necessary width */
-    align-items: center; /* Aligns the icon vertically in the button */
-    padding: 0; /* Removes any default padding */
-    border: none; /* Removes any default border */
-    cursor: pointer; /* Adds cursor pointer on hover */
+    display: inline-flex;
+    /* Ensures the button only takes the necessary width */
+    align-items: center;
+    /* Aligns the icon vertically in the button */
+    padding: 0;
+    /* Removes any default padding */
+    border: none;
+    /* Removes any default border */
+    cursor: pointer;
+    /* Adds cursor pointer on hover */
     border-radius: 25px;
 }
+
 .btn:hover {
     background-color: RoyalBlue;
 }
-i{
-    width:fit-content;
+
+i {
+    width: fit-content;
 }
 
-main{
+main {
     padding: 30px;
 
 }
+
 html {
     font-family: 'Lora', sans-serif;
     width: 100%;
@@ -149,11 +172,11 @@ h1 {
 }
 
 
-table{
+table {
     border-spacing: 30px;
 }
 
-.article-image{
+.article-image {
     height: 120px;
     width: auto;
 
@@ -175,19 +198,18 @@ table{
     font-size: 16px;
     padding: 8px;
 }
-.search-button{
+
+.search-button {
     background-color: transparent;
 
 }
-.shopping-cart{
+
+.shopping-cart {
 
     position: absolute;
     top: 0;
     right: 50px;
 
 }
-
-
-
 </style>
 
