@@ -18,3 +18,7 @@ Route::get('/ajax-examples/1', function () {
 Route::get('/ajax-examples/2', function () {
     return view('ajax-examples/3-ajax2-periodic');
 });
+
+Route::get('/test',function () {
+   return view('welcome');
+});

@@ -37,9 +37,9 @@ class articleController extends Controller
 
         if (isset($article_name)) {
             $article = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%')
-                ->get();
+                ->paginate(5);
         } else {
-            $article = $query->get();
+            $article = $query->paginate(5);
         }
         return view('articles', ['articles' => $article, 'request' => $request]);
     }
@@ -61,8 +61,8 @@ class articleController extends Controller
             ->orderBy('ab_article.id');
 
         $article = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%')
-            ->get();
-        return response()->json(array('articles' => $article));
+            ->paginate(5);
+        return $article;//response()->json(array('articles' => $article));
 
     }
 

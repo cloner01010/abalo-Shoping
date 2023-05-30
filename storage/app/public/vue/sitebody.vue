@@ -1,6 +1,6 @@
 <template>
     <div class="shopping-cart">
-        <shopping-cart-popup @remove-item="loadData"></shopping-cart-popup>
+        <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
     </div>
     <main>
         <div class="search-container">
@@ -8,6 +8,9 @@
             <button class="search-button btn" type="submit" value="search">
                 <i class="fa-brands fa-searchengin fa-xl"></i>
             </button>
+        </div>
+        <div class="pagination">
+            <pagination  :pagination="articles" @page-change="loadData"></pagination>
         </div>
         <table id="articles-table">
             <tr id="header-table">
@@ -18,7 +21,7 @@
                 <th>Creator</th>
                 <th>Created at</th>
             </tr>
-            <tr v-for="article in articles['articles']" :key="article.id">
+            <tr v-for="article in articles['data']" :key="article.id">
                 <th><img class="article-image" :src="article.ab_file_path" alt="Artikel"></th>
                 <th>{{article.ab_name}}</th>
                 <th>{{article.ab_price}}€</th>
@@ -36,6 +39,7 @@
 <script>
 
 import ShoppingCartPopup from "./shopping-cart.vue";
+import pagination from "./pagination.vue";
 
 export default {
 
@@ -43,25 +47,28 @@ export default {
         return {
             articles:[],
 
+
         };
     },
     components: {
         ShoppingCartPopup,
+        pagination
     },
     created() {
-        this.loadData();
+        this.loadData(1);
 
     },
     methods:{
-        loadData(){
+        loadData(page){
             const self = this;
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/api/articles');
+            xhr.open('GET', '/api/articles?page='+page);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onreadystatechange = function(){
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         self.articles=JSON.parse(xhr.responseText);
+
 
                     }
                 }
@@ -82,7 +89,7 @@ export default {
                         if (response.errors) {
                             alert(response.errors);
                         } else {
-                            self.loadData();
+                            self.loadData(self.articles.current_page);
                         }
                     }
                 }
@@ -90,12 +97,16 @@ export default {
             xhr.send(JSON.stringify({
                 id: event.target.id
             }));
-        }
+        },
     }
 }
 </script>
 
 <style scoped>
+.pagination{
+    float: right;
+    margin:25px;
+}
 .btn {
     background-color: white; /* Blue background */
     border: none; /* Remove borders */

@@ -19,6 +19,12 @@
 
 <script >
 export default {
+    props:{
+        currentPage:{
+            type: Number,
+            required: true,
+        }
+    },
     data() {
         return {
             cartItems:[],
@@ -66,7 +72,7 @@ export default {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                        self.loadCartItems();
-                        self.$emit('remove-item', articleId);
+                        self.$emit('remove-item', self.$props.currentPage);
                     }
                 }
             }
