@@ -101,7 +101,7 @@ export default {
                 }
             }
             xhr.send(JSON.stringify({
-                id: event.target.id
+                id: event.target.parentElement.id
             }));
         },
     }

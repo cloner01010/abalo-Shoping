@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\Paginator;
 use App\Models\ab_article;
-use http\QueryString;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class articleController extends Controller
 {
+    use Paginator;
     public function __construct()
     {
         @parent::__construct();
@@ -37,9 +38,9 @@ class articleController extends Controller
 
         if (isset($article_name)) {
             $article = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%')
-                ->paginate(5);
+                ->get();
         } else {
-            $article = $query->paginate(5);
+            $article = $query->get();
         }
         return view('articles', ['articles' => $article, 'request' => $request]);
     }
@@ -60,9 +61,8 @@ class articleController extends Controller
             )
             ->orderBy('ab_article.id');
 
-        $article = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%')
-            ->paginate(5);
-        return $article;//response()->json(array('articles' => $article));
+        $query = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%');
+        return $this->paginateQuery($query,$request->input('page'));
 
     }
 
