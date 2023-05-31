@@ -21,8 +21,9 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3><a href="#">Impressum</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper consequat velit, non auctor odio accumsan ac.</p>
+                    <h3 class="show-imprint" @click="show">Impressum</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Duis semper consequat velit, non auctor odio accumsan ac.</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -33,14 +34,27 @@
 </template>
 
 <script>
+
+
 export default {
-    name: "sitefooter"
+    emits:['show-impressum'],
+    methods:{
+        show(){
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            const self = this;
+            self.$emit('show-impressum',true);
+        }
+    }
 }
 </script>
 
 <style scoped>
 /* Footer styles */
 .footer {
+    position: absolute;
     background-color: #f8f8f8;
     padding: 40px 0;
     color: #777;
@@ -92,6 +106,8 @@ export default {
 .footer-bottom p {
     margin: 0;
 }
-
+.show-imprint{
+    cursor: pointer;
+}
 
 </style>

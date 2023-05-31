@@ -48,6 +48,13 @@ export default {
         };
     },
     emits: ['remove-item'],
+    watch:{
+      cartItems(newValue){
+          if(newValue["cart-items"].length === 0){
+              this.closePopup();
+          }
+      }
+    },
     created() {
         this.loadCartItems();
     },
@@ -89,7 +96,7 @@ export default {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                        self.loadCartItems();
-                        self.$emit('remove-item', self.$props.currentPage);
+                        self.$emit('remove-item', {search:"",page:self.$props.currentPage});
                     }
                 }
             }

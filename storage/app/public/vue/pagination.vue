@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         changePage(page) {
-            this.$emit('page-change', page);
+            this.$emit('page-change', {search:"",page:page});
         },
     },
 };

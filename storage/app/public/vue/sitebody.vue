@@ -3,14 +3,7 @@
         <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
     </div>
     <main>
-        <div class="search-container">
-            <input type="text" placeholder="Search..." class="search-input">
-            <button class="search-button btn" type="submit" value="search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </button>
-        </div>
+       <search @search-input="loadData"></search>
         <div class="pagination">
             <pagination  :pagination="articles" @page-change="loadData"></pagination>
         </div>
@@ -36,8 +29,8 @@
                     </svg>
                 </button></th>
             </tr>
-
-
+            <sitefooter @show-impressum="imprint"></sitefooter>
+            <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
         </table>
     </main>
 </template>
@@ -46,29 +39,34 @@
 
 import ShoppingCartPopup from "./shopping-cart.vue";
 import pagination from "./pagination.vue";
+import search from "./search.vue";
+import impressum from "./impressum.vue";
+import sitefooter from "./sitefooter.vue";
 
 export default {
 
     data() {
         return {
             articles:[],
-
-
+            showImpressum: false
         };
     },
     components: {
         ShoppingCartPopup,
-        pagination
+        pagination,
+        search,
+        sitefooter,
+        impressum
     },
     created() {
-        this.loadData(1);
+        this.loadData({search:"",page:1});
 
     },
     methods:{
-        loadData(page){
+        loadData({search,page}){
             const self = this;
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/api/articles?page='+page);
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/articles?page='+page+'&search='+search);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onreadystatechange = function(){
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -95,7 +93,7 @@ export default {
                         if (response.errors) {
                             alert(response.errors);
                         } else {
-                            self.loadData(self.articles.current_page);
+                            self.loadData({search:"",page:self.articles.current_page});
                         }
                     }
                 }
@@ -104,6 +102,10 @@ export default {
                 id: event.target.parentElement.id
             }));
         },
+        imprint(show){
+            const self = this;
+            self.showImpressum=show;
+        }
     }
 }
 </script>
@@ -170,26 +172,7 @@ table{
 
 }
 
-.search-container {
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    padding: 8px;
-}
 
-.search-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    font-size: 16px;
-    padding: 8px;
-}
-.search-button{
-    background-color: transparent;
-
-}
 .shopping-cart{
 
     position: absolute;

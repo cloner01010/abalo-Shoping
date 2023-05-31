@@ -17,7 +17,7 @@
     @verbatim
         <siteheader></siteheader>
         <sitebody></sitebody>
-        <sitefooter></sitefooter>
+
     @endverbatim
 </div>
 @vite('storage/app/public/js/newsite.js')
