@@ -7,7 +7,11 @@
                         <li v-for="submenu in items.submenu" ><a :href="submenu.link">{{submenu.label}}</a></li>
                     </ul>
                     <ul v-else-if="items.label==='Kategorien'" class="submenu-list">
-                        <li v-for="category in cat"><a>{{category.ab_name}}</a></li>
+                        <li  v-for="category in cat"><a :href="category.link">{{category.label}}</a>
+                            <ul v-if="category.submenu" class="submenu-submenu-list">
+                                <li v-for="submenu in category.submenu" ><a :href="submenu.link">{{submenu.label}}</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -24,6 +28,7 @@
                 </button>
         </div>
     </header>
+
 </template>
 
 <script>
@@ -98,10 +103,11 @@ export default {
     padding: 10px;
 }
 
+/* Styles for the main navigation bar */
 .menu-list {
-    list-style-type: none;
-    margin: 0;
+    list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .menu-list li {
@@ -110,25 +116,21 @@ export default {
 
 .menu-list li a {
     display: block;
-    color: #fff;
     padding: 10px 20px;
     text-decoration: none;
+    color: white;
 }
 
-.menu-list li a:hover {
-    background-color: #555;
+.menu-list li:hover > a {
+    background-color: grey;
 }
 
+/* Styles for the nested submenus */
 .submenu-list {
     display: none;
     position: absolute;
     background-color: #333;
-    padding: 10px;
-    z-index: 1;
-}
-
-.menu-list li:hover .submenu-list {
-    display: block;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .submenu-list li {
@@ -136,13 +138,39 @@ export default {
 }
 
 .submenu-list li a {
-    color: #fff;
-    text-decoration: none;
+    padding: 10px 20px;
 }
 
-.submenu-list li a:hover {
-    background-color: #555;
+.submenu-submenu-list {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: #333;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
+
+.submenu-submenu-list li {
+    display: block;
+}
+
+.submenu-submenu-list li a {
+    padding: 10px 20px;
+}
+
+/* Show the submenus on hover */
+.menu-list li:hover > .submenu-list {
+    display: block;
+}
+
+.submenu-list li:hover > .submenu-submenu-list {
+    display: block;
+    left: 100%;
+    top: 0;
+}
+
+
+
 .header-container{
     padding: 30px;
 }
