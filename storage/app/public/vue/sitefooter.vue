@@ -4,8 +4,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>About Us</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper consequat velit, non auctor odio
-                        accumsan ac.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper consequat velit, non auctor odio accumsan ac.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
@@ -22,7 +21,8 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3><button @click="handleClick">Impressum</button></h3>
+                    <h3><a href="#">Impressum</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper consequat velit, non auctor odio accumsan ac.</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -34,13 +34,7 @@
 
 <script>
 export default {
-    name: "sitefooter",
-    emits: ['statusImprint'],
-    methods: {
-        handleClick: function (evt) {
-            this.$emit("statusImprint", true);
-        }
-    }
+    name: "sitefooter"
 }
 </script>
 
@@ -99,6 +93,5 @@ export default {
     margin: 0;
 }
 
-/* Font Awesome icons */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
 </style>
