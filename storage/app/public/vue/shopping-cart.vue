@@ -12,10 +12,9 @@
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
             </svg>
         </button>
-        <button class="reload-btn btn" @click="loadCartItems">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+        <button class="btn shopping-cart-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="shopping-cart-btn bi bi-cart4" viewBox="0 0 16 16">
+                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
             </svg>
         </button>
         <div v-for="article in cartItems['cart-items']" :key="article.id" class="item">
@@ -36,6 +35,12 @@
 
 <script >
 export default {
+    mounted() {
+        window.Echo.channel('public').listen('CartItemAddedEvent',(e)=>{
+             this.loadCartItems();
+        })
+
+    },
     props:{
         currentPage:{
             type: Number,
@@ -65,9 +70,10 @@ export default {
         },
         openPopup(){
             const self = this;
-            self.loadCartItems();
-            document.getElementById('shoppingCart').style.display = 'block';
-            document.getElementById('shopping-cart').style.display = 'none';
+            if(self.cartItems["cart-items"].length > 0){
+                document.getElementById('shoppingCart').style.display = 'block';
+                document.getElementById('shopping-cart').style.display = 'none';
+            }
         },
         loadCartItems(){
             const self = this;
@@ -107,21 +113,20 @@ export default {
 </script>
 
 <style scoped>
-.reload-btn{
+
+.close-button {
     position:relative;
     float:right;
     top: 5px;
     right: 5px;
+
 }
-.close-button {
-    position: relative;
-    top: 5px;
-    right: 5px;
-}
+
 .shopping-cart-popup {
     display: none;
-    top: 20px;
-    right: 20px;
+    position: relative;
+
+    transform: translate(-50%, 0%);
     width: 500px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -183,4 +188,14 @@ i{
 .btn:hover {
     background-color: RoyalBlue;
 }
+.shopping-cart-logo:hover{
+    background-color:white;
+}
+.shopping-cart-logo{
+    position:relative;
+    top: 5px;
+    right: 5px;
+    cursor: text;
+}
+
 </style>

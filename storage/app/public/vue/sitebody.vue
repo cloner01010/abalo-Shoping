@@ -1,13 +1,28 @@
 <template>
-    <div class="shopping-cart">
-        <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
-    </div>
     <main>
        <search @search-input="loadData"></search>
+        <div class="shopping-cart">
+            <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
+        </div>
         <div class="pagination">
             <pagination  :pagination="articles" @page-change="loadData"></pagination>
         </div>
-        <table id="articles-table">
+        <div class="card-container">
+            <div  v-for="article in articles['data']" :key="article.id" class="card">
+                <img :src="article.ab_file_path" alt="Artikel">
+                <h3>{{article.ab_name}}</h3>
+                <p>Price: {{article.ab_price}} €</p>
+                <p>Description: {{article.ab_description}}</p>
+                <p>Creator: {{article.user_name}}</p>
+                <p>Created at: {{article.ab_createdate}}</p>
+                <button @click="addCartItem" :id="article.id" class="btn add-btn">
+                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="add-btn bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+       <!-- <table id="articles-table">
             <tr id="header-table">
                 <th></th>
                 <th>Name</th>
@@ -29,9 +44,10 @@
                     </svg>
                 </button></th>
             </tr>
-            <sitefooter @show-impressum="imprint"></sitefooter>
-            <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
-        </table>
+
+        </table> -->
+        <sitefooter @show-impressum="imprint"></sitefooter>
+        <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
     </main>
 </template>
 
@@ -112,7 +128,7 @@ export default {
 
 <style scoped>
 .pagination{
-    float: right;
+    float: left;
     margin:25px;
 }
 .btn {
@@ -175,12 +191,45 @@ table{
 
 .shopping-cart{
 
-    position: absolute;
-    top: 0;
-    right: 50px;
+    position: relative;
+    float: right;
+    margin: 25px;
+
 
 }
 
+.card-container {
+    position: relative;
+    display: grid;
+    width: 900px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin: 10px;
+}
+
+.card {
+    width: 300px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+}
 
 
 </style>

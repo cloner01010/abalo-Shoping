@@ -13,7 +13,10 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
         "laravel-echo": "^1.15.1",
+        "pusher-js": "^8.0.2",
+        "requirejs": "^2.3.6",
         "socket.io-client": "^4.6.1",
+        "vite-require": "^0.2.3",
         "vue": "^3.2.36"
     }
 }

@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Events\CartItemAddedEvent;
 use App\Models\ab_article;
 use App\Models\ab_shoppingcart;
 use App\Models\ab_shoppingcart_item;
@@ -35,6 +36,7 @@ class ShoppingcartController extends Controller
             $shoppingcartItem->ab_article_id=$request->input('id');
             $shoppingcartItem->ab_createdate=now();
             $shoppingcartItem->save();
+            broadcast(new CartItemAddedEvent());
             return response()->json([
                 'shoppingCartId' => $shoppingcart_id,
                 'articleId'=> $shoppingcartItem->ab_article_id
