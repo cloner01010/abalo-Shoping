@@ -1,4 +1,7 @@
 <template>
+    <div class="logo-container">
+        <img class="logo" src="../logoabalo.JPG" alt="">
+    </div>
     <header class="header-container" id="header">
         <nav class="navbar" id="navbar">
             <ul class="menu-list">
@@ -172,7 +175,7 @@ export default {
 
 
 .header-container{
-    padding: 30px;
+    padding: 10px;
 }
 
 .shopping-cart{
@@ -180,9 +183,9 @@ export default {
 }
 .logout{
     position: absolute;
+    display: inline;
     top: 0;
     right: 0;
-
 }
 
 i{
@@ -202,6 +205,16 @@ i{
     cursor: pointer; /* Mouse pointer on hover */
     border-radius: 25px;
 }
-
+.logo-container {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 10px; /* Add some padding around the logo */
+}
+.logo{
+    width: 250px; /* Set the desired width of the logo */
+    height: auto;
+}
 
 </style>

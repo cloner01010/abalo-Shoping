@@ -14,7 +14,7 @@
     @parent
 @endsection
 <div id="login-form-wrap">
-    <img style="width: fit-content" src="{{ asset('storage/logo.png')}}">
+    <img src="{{ asset('storage/logoabalo.JPG')}}" alt="">
     <h2>Login</h2>
     <form id="login-form" method="post" action={{route('login')}}>
         @csrf

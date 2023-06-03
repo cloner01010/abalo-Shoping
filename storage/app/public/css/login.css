@@ -4,6 +4,9 @@ body {
     font-family: "Open Sans", sans-serif;
     color: #2b3e51;
 }
+img{
+    width: 300px;
+}
 
 h2 {
     font-weight: 300;
