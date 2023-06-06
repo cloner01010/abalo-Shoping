@@ -122,4 +122,13 @@ Quellen: [CanIUse.com](https://caniuse.com/), [MDN.org](https://developer.mozill
 
 1) Effiziente Entwicklung: Vorgefertigten Code Snippets. Somit kann häufig verwendeter Code schneller eingefügt werden
 2) Code-Vervollständigung: Verbesserte Code-Vervollständigung wärend des Coden
-3) Zeitersparnis und Fehlervermeidung: Durch die SNippets kann Code einfach wiederverwendet werden, was Fehler beim codieren vermeidet
+3) Fehlervermeidung: Durch die SNippets kann Code einfach wiederverwendet werden, was Fehler beim codieren vermeidet
+
+### Aufgabe 3 - Vue Dokumentation
+
+1) Die Anfangsmotivation war, dass Evan You ein Framework für sich selbst entwickeln wollte, so dass er Effizinter arbeitet. Seine Idee war es den Dome mit Javascript Objekten zu syncronisieren.
+Ähnlich wie ein Künstler in der Musik, hatte er zunächst nie daran gedacht damit Geld zu verdienen.
+2) Evan You hatte mit Backbone als sein erstes Framework gestartet. Er hatte das Gefühl, dass die damals aktuellen Frameworks seine Probleme nicht lösen. Backbone gibt eine Applikationsstruktur vor und keine möglichen Interaktionen mit einer View.
+3) Taylor Otwell, war von React etwas überfordert. Deshalb entschied er sich dafür Vue.JS zu lernen, weil es einfacher war. Er benötigte ein Frontend Framework, da er gerade Laravel Spark am entwickeln war (Scaffolding Tool - Software and Services. Um ein eigenes Unternehmen aufzubauen). Kurz und knapp: Einfachheit   
+4) Angular hat zwar Databinding und ermöglichte State Sync, jedoch gab Angular eine strikte Programmierichtung vor, was das Programmieren verschwert hat bei einer Interaktiven Webapp.
+5) Die offensichtliche Einfachheit der Entwicklung. Jedoch finde ich es auch erstaunlich, dass kein großes Unternehmen hinter dem Framework steckt. Das sorgt für ein noch größeren Push.
