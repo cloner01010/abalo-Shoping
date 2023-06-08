@@ -1,7 +1,7 @@
 <template>
-    <div id="impressum-overlay" class="impressum-overlay">
-        <div class="impressum-content">
-               <span @click="hide" class="close-button">  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+    <div id="impressum-overlay" class="impressum">
+        <div class="impressum--content">
+               <span @click="hide" class="impressum__button--content">  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
             </svg></span>
             <h1>Impressum</h1>
@@ -54,73 +54,5 @@ export default {
 </script>
 
 <style scoped>
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-.impressum-overlay {
-    overflow-y: scroll;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(5px); /* Adjust the blur value (5px) as needed */
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.impressum-content {
-    max-height: 90vh; /* Set a maximum height to enable scrolling within the pop-up */
-    background-color: #fff;
-    padding: 20px;
-    max-width: 600px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    overflow-y: auto;
-}
-
-.impressum-content h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.impressum-content p {
-    margin-bottom: 10px;
-}
-
-.impressum-content strong {
-    font-weight: bold;
-}
-
-.impressum-content a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.impressum-content a:hover {
-    text-decoration: underline;
-}
-
-.close-button {
-    position: relative;
-    float: right;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #555;
-}
-
-@media (max-width: 768px) {
-    .impressum-content {
-        max-width: 90%;
-    }
-}
+@import '../../../../resources/css/impressum.scss';
 </style>

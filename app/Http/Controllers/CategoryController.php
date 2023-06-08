@@ -20,7 +20,6 @@ class CategoryController extends Controller
     public function buildSubMenu($categories, $parentId = null)
     {
         $submenu = [];
-
         foreach ($categories as $category) {
             if ($category['ab_parent'] === $parentId) {
                 $submenuItem = [
@@ -40,7 +39,4 @@ class CategoryController extends Controller
 
         return $submenu;
     }
-
-
-
 }

@@ -1,28 +1,30 @@
 <template>
-    <main>
-       <search @search-input="loadData"></search>
-        <div class="shopping-cart">
+    <main class="container">
+        <search @search-input="loadData"></search>
+        <div class="container--shopping-cart">
             <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
         </div>
-        <div class="pagination">
-            <pagination  :pagination="articles" @page-change="loadData"></pagination>
+        <div class="container--pagination">
+            <pagination :pagination="articles" @page-change="loadData"></pagination>
         </div>
-        <div class="card-container">
-            <div  v-for="article in articles['data']" :key="article.id" class="card">
+        <div class="container__section">
+            <div v-for="article in articles['data']" :key="article.id" class="container__section--card">
                 <img :src="article.ab_file_path" alt="Artikel">
-                <h3>{{article.ab_name}}</h3>
-                <p>Price: {{article.ab_price}} €</p>
-                <p>Description: {{article.ab_description}}</p>
-                <p>Creator: {{article.user_name}}</p>
-                <p>Created at: {{article.ab_createdate}}</p>
-                <button @click="addCartItem" :id="article.id" class="btn add-btn">
-                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="add-btn bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
+                <h3>{{ article.ab_name }}</h3>
+                <p>Price: {{ article.ab_price }} €</p>
+                <p>Description: {{ article.ab_description }}</p>
+                <p>Creator: {{ article.user_name }}</p>
+                <p>Created at: {{ article.ab_createdate }}</p>
+                <button @click="addCartItem" :id="article.id" class="container__button container__button--add">
+                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                        class="button--add bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
                     </svg>
                 </button>
             </div>
         </div>
-       <!-- <table id="articles-table">
+        <!-- <table id="articles-table">
             <tr id="header-table">
                 <th></th>
                 <th>Name</th>
@@ -32,14 +34,14 @@
                 <th>Created at</th>
             </tr>
             <tr v-for="article in articles['data']" :key="article.id">
-                <th><img class="article-image" :src="article.ab_file_path" alt="Artikel"></th>
+                <th><img class="article__image" :src="article.ab_file_path" alt="Artikel"></th>
                 <th>{{article.ab_name}}</th>
                 <th>{{article.ab_price}}€</th>
                 <th>{{article.ab_description}}</th>
                 <th>{{article.user_name}}</th>
                 <th>{{article.ab_createdate}}</th>
-                <th><button @click="addCartItem" :id="article.id" class="btn add-btn">
-                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="add-btn bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                <th><button @click="addCartItem" :id="article.id" class="button button--add">
+                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="button--add bi bi-cart-plus-fill" viewBox="0 0 16 16">
                         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
                     </svg>
                 </button></th>
@@ -63,7 +65,7 @@ export default {
 
     data() {
         return {
-            articles:[],
+            articles: [],
             showImpressum: false
         };
     },
@@ -75,19 +77,19 @@ export default {
         impressum
     },
     created() {
-        this.loadData({search:"",page:1});
+        this.loadData({ search: "", page: 1 });
 
     },
-    methods:{
-        loadData({search,page}){
+    methods: {
+        loadData({ search, page }) {
             const self = this;
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', '/api/articles?page='+page+'&search='+search);
+            xhr.open('GET', '/api/articles?page=' + page + '&search=' + search);
             xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function(){
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
-                        self.articles=JSON.parse(xhr.responseText);
+                        self.articles = JSON.parse(xhr.responseText);
 
 
                     }
@@ -109,7 +111,7 @@ export default {
                         if (response.errors) {
                             alert(response.errors);
                         } else {
-                            self.loadData({search:"",page:self.articles.current_page});
+                            self.loadData({ search: "", page: self.articles.current_page });
                         }
                     }
                 }
@@ -118,119 +120,115 @@ export default {
                 id: event.target.parentElement.id
             }));
         },
-        imprint(show){
+        imprint(show) {
             const self = this;
-            self.showImpressum=show;
+            self.showImpressum = show;
         }
     }
 }
 </script>
 
-<style scoped>
-.pagination{
-    float: left;
-    margin:25px;
+<style scoped lang="scss">
+
+$primary-font: 'Lora', sans-serif;
+$container-width: 900px;
+
+html {
+  font-family: $primary-font;
+  width: 100%;
+
+  body {
+    padding: 0 20px 20px 20px;
+    width: 95%;
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 2.5%;
+
+      table {
+        border-spacing: 30px;
+      }
+    }
+  }
 }
-.btn {
-    background-color: white; /* Blue background */
-    border: none; /* Remove borders */
+
+i {
+  width: fit-content;
+}
+
+main {
+  padding: 30px;
+}
+
+.container {
+  margin: 0;
+
+  &--pagination {
+    float: left;
+    margin: 25px;
+  }
+
+  &__button {
+    background-color: white;
+    border: none;
     width: fit-content;
     padding: 0px 10px;
     margin: 10px;
-    cursor: pointer; /* Mouse pointer on hover */
+    cursor: pointer;
     border-radius: 25px;
-}
-.add-btn {
-    background: none;
-    display: inline-flex; /* Ensures the button only takes the necessary width */
-    align-items: center; /* Aligns the icon vertically in the button */
-    padding: 0; /* Removes any default padding */
-    border: none; /* Removes any default border */
-    cursor: pointer; /* Adds cursor pointer on hover */
-    border-radius: 25px;
-}
 
-.btn:hover {
-    background-color: RoyalBlue;
-}
-i{
-    width:fit-content;
-}
+    &:hover {
+      background-color: RoyalBlue;
+    }
 
-main{
-    padding: 30px;
+    &--add {
+      background: none;
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+      border-radius: 25px;
+    }
+  }
 
-}
-html {
-    font-family: 'Lora', sans-serif;
-    width: 100%;
-}
-
-body {
-    /* margin: 5% auto 0 auto;*/
-    padding: 0 20px 20px 20px;
-    width: 95%;
-}
-
-h1 {
-    font-size: 28px;
-    margin-bottom: 2.5%;
-}
-
-
-table{
-    border-spacing: 30px;
-}
-
-.article-image{
-    height: 120px;
-    width: auto;
-
-}
-
-
-.shopping-cart{
-
-    position: relative;
-    float: right;
-    margin: 25px;
-
-
-}
-
-.card-container {
+  &__section {
     position: relative;
     display: grid;
-    width: 900px;
+    width: $container-width;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 15px;
     margin: 10px;
+
+    &--card {
+      width: 300px;
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 8px;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+  }
 }
 
-.card {
-    width: 300px;
-    background-color: #f1f1f1;
-    padding: 20px;
-    border-radius: 8px;
+.container--shopping-cart {
+  position: relative;
+  float: right;
+  margin: 25px;
 }
-
-.card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.card h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.card p {
-    font-size: 14px;
-    color: #666;
-}
-
-
 </style>
-
