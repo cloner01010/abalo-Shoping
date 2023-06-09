@@ -22,6 +22,5 @@
 </div>
 @vite('storage/app/public/js/newsite.js')
 </body>
-
 </html>
 
