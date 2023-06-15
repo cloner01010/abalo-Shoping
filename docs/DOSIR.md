@@ -132,3 +132,15 @@ Quellen: [CanIUse.com](https://caniuse.com/), [MDN.org](https://developer.mozill
 3) Taylor Otwell, war von React etwas überfordert. Deshalb entschied er sich dafür Vue.JS zu lernen, weil es einfacher war. Er benötigte ein Frontend Framework, da er gerade Laravel Spark am entwickeln war (Scaffolding Tool - Software and Services. Um ein eigenes Unternehmen aufzubauen). Kurz und knapp: Einfachheit   
 4) Angular hat zwar Databinding und ermöglichte State Sync, jedoch gab Angular eine strikte Programmierichtung vor, was das Programmieren verschwert hat bei einer Interaktiven Webapp.
 5) Die offensichtliche Einfachheit der Entwicklung. Jedoch finde ich es auch erstaunlich, dass kein großes Unternehmen hinter dem Framework steckt. Das sorgt für ein noch größeren Push.
+
+
+## Praktikum 5
+### Aufgabe 11 - Vue Dokumentation
+
+1) Echtzeit-Benachrihctigungen über neue Angebote:
+   - Durch die Integration von WebSockets kann ein Online-Shop Benutzer in Echtzeit über neue Angebote für Waren informiert werdden. Wenn ein Kunde bspw. nach einem bestimmten Produkt sucht und es nicht sofort verfügbar ist, kann er eine Benachrichtigung erhalten, sobald ein neues Angebot da ist.
+2) Live-Chat für Kunden- und Verkäuferunterstützung:
+   -  Kunden/Verkäufer können direkt mit einem Mitarbeiter kommunizieren, um Fragen zu Produkten, Zahlungen, Verkauf oder Versand zu klären.
+3) Echtzeit-Verfolgung von Bestellungen:
+   - Kunden können den genauen Status ihrer Bestellungen in Echtzeit einsehen, bspw. ob die Bestellung bestätigt, verpackt, versandt oder zugestellt wurde.
+   
