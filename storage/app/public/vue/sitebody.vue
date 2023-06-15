@@ -52,9 +52,9 @@
             </tr>
 
         </table> -->
-        <sitefooter @show-impressum="imprint"></sitefooter>
-        <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
-    </main>
+    <sitefooter @show-impressum="imprint"></sitefooter>
+    <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
+  </main>
 </template>
 
 <script>
@@ -122,68 +122,63 @@ export default {
                         self.articles = JSON.parse(xhr.responseText);
 
 
-                    }
-                }
-            }
-            xhr.send();
-        },
-        addCartItem(event) {
-            const self = this;
-            const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/api/shoppingcart');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader("X-CSRF-Token", csrfToken);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response.errors) {
-                            alert(response.errors);
-                        } else {
-                            self.loadData({ search: "", page: self.articles.current_page });
-                        }
-                    }
-                }
-            }
-            xhr.send(JSON.stringify({
-                id: event.target.parentElement.id
-            }));
-        },
-        imprint(show) {
-            const self = this;
-            self.showImpressum = show;
+          }
         }
+      }
+      xhr.send();
+    },
+    addCartItem(event) {
+      const self = this;
+      const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/shoppingcart');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.errors) {
+              alert(response.errors);
+            } else {
+              self.loadData({ search: "", page: self.articles.current_page });
+            }
+          }
+        }
+      }
+      xhr.send(JSON.stringify({
+        id: event.target.parentElement.id
+      }));
+    },
+    imprint(show) {
+      const self = this;
+      self.showImpressum = show;
     }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-
 $primary-font: 'Lora', sans-serif;
 $container-width: 900px;
 
 html {
   font-family: $primary-font;
   width: 100%;
-
-  body {
-    padding: 0 20px 20px 20px;
-    width: 95%;
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 2.5%;
-
-      table {
-        border-spacing: 30px;
-      }
-    }
-  }
 }
 
-i {
-  width: fit-content;
+body {
+  padding: 0 20px 20px 20px;
+  width: 95%;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 2.5%;
+
+  table {
+    border-spacing: 30px;
+  }
 }
 
 main {
@@ -226,7 +221,7 @@ main {
     position: relative;
     display: grid;
     width: $container-width;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin: 10px;
 
@@ -280,3 +275,4 @@ main {
 
 
 </style>
+
