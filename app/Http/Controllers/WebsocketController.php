@@ -16,19 +16,17 @@ class WebsocketController extends Controller implements \Ratchet\MessageComponen
 
     public function onOpen(ConnectionInterface $conn) {
         // Store the new connection to send messages to later
-       // $queryParams = $conn->httpRequest->getUri()->getQuery();
-       // parse_str($queryParams, $queryData);
-      // // $userId = $queryData['user_id'];
-      //  $queryParameters = $conn->WebSocket->request->getQuery();
-      //parse_str($queryParameters, $queryParams);
-        $conn->resourceId = $__GET['user_id']?? $conn->resourceId;
+        $queryParams = $conn->httpRequest->getUri()->getQuery();
+        parse_str($queryParams, $queryData);
 
+        $conn->resourceId = array_key_exists('user_id', $queryData) && !empty($queryData['user_id'])? $queryData['user_id']: $conn->resourceId;
         $this->clients->attach($conn);
 
         echo "New connection! ({$conn->resourceId})\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
+
         foreach ($this->clients as $client) {
            // if ($from !== $client) {
                 // The sender is not the receiver, send to each client connected

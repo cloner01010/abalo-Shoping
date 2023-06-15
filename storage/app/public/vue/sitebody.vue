@@ -67,20 +67,30 @@ import sitefooter from "./sitefooter.vue";
 import axios from 'axios';
 export default {
     mounted() {
-        let socket = new WebSocket('ws://127.0.0.1:8888/?user_id='+this.user_id);
-        socket.onopen = (event) => {
+        axios.get('/api/current-user')
+            .then(response => {
+                // Redirect the user to the desired location
+                this.user_id=response.data;
+                console.log(this.user_id);
+                let socket = new WebSocket('ws://127.0.0.1:8888/?user_id='+this.user_id);
+                socket.onopen = (event) => {
 
-        };
-        socket.onclose = (closeEvent) => {
-            console.log(
-                'Connection closed' +
-                ': code=', closeEvent.code,
-                '; reason=', closeEvent.reason);
-        };
-        socket.onmessage = (msgEvent) => {
-            let data=JSON.parse(msgEvent.data);
-            this.maintenanceMessage=data.message;
-        };
+                };
+                socket.onclose = (closeEvent) => {
+                    console.log(
+                        'Connection closed' +
+                        ': code=', closeEvent.code,
+                        '; reason=', closeEvent.reason);
+                };
+                socket.onmessage = (msgEvent) => {
+                    let data=JSON.parse(msgEvent.data);
+                    this.maintenanceMessage=data.message;
+                };
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
     },
     data() {
         return {
@@ -98,14 +108,6 @@ export default {
         impressum
     },
     created() {
-        axios.get('/api/current-user')
-            .then(response => {
-                // Redirect the user to the desired location
-               this.user_id=response.data;
-            })
-            .catch(error => {
-                console.error(error);
-            });
         this.loadData({ search: "", page: 1 });
 
     },
