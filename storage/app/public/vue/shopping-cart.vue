@@ -125,7 +125,8 @@ export default {
 .shopping-cart-popup {
     display: none;
     position: relative;
-
+    z-index: 1000;
+    margin-bottom: 10%;
     transform: translate(-50%, 0%);
     width: 500px;
     background-color: #fff;
@@ -196,6 +197,11 @@ i{
     top: 5px;
     right: 5px;
     cursor: text;
+}
+.shopping-cart {
+    position: relative;
+    float: right;
+    margin: 25px;
 }
 
 </style>

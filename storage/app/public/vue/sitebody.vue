@@ -1,30 +1,30 @@
 <template>
-    <main class="container">
-        <search @search-input="loadData"></search>
-        <div class="container--shopping-cart">
-            <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
-        </div>
-        <div class="container--pagination">
-            <pagination :pagination="articles" @page-change="loadData"></pagination>
-        </div>
-        <div class="container__section">
-            <div v-for="article in articles['data']" :key="article.id" class="container__section--card">
-                <img :src="article.ab_file_path" alt="Artikel">
-                <h3>{{ article.ab_name }}</h3>
-                <p>Price: {{ article.ab_price }} €</p>
-                <p>Description: {{ article.ab_description }}</p>
-                <p>Creator: {{ article.user_name }}</p>
-                <p>Created at: {{ article.ab_createdate }}</p>
-                <button @click="addCartItem" :id="article.id" class="container__button container__button--add">
-                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                        class="button--add bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <!-- <table id="articles-table">
+  <main class="container">
+    <search @search-input="loadData"></search>
+    <div class="container--shopping-cart">
+      <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
+    </div>
+    <div class="container--pagination">
+      <pagination :pagination="articles" @page-change="loadData"></pagination>
+    </div>
+    <div class="container__section">
+      <div v-for="article in articles['data']" :key="article.id" class="container__section--card">
+        <img :src="article.ab_file_path" alt="Artikel">
+        <h3>{{ article.ab_name }}</h3>
+        <p>Price: {{ article.ab_price }} €</p>
+        <p>Description: {{ article.ab_description }}</p>
+        <p>Creator: {{ article.user_name }}</p>
+        <p>Created at: {{ article.ab_createdate }}</p>
+        <button @click="addCartItem" :id="article.id" class="container__button container__button--add">
+          <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+            class="button--add bi bi-cart-plus-fill" viewBox="0 0 16 16">
+            <path
+              d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- <table id="articles-table">
             <tr id="header-table">
                 <th></th>
                 <th>Name</th>
@@ -48,9 +48,9 @@
             </tr>
 
         </table> -->
-        <sitefooter @show-impressum="imprint"></sitefooter>
-        <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
-    </main>
+    <sitefooter @show-impressum="imprint"></sitefooter>
+    <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
+  </main>
 </template>
 
 <script>
@@ -63,97 +63,92 @@ import sitefooter from "./sitefooter.vue";
 
 export default {
 
-    data() {
-        return {
-            articles: [],
-            showImpressum: false
-        };
-    },
-    components: {
-        ShoppingCartPopup,
-        pagination,
-        search,
-        sitefooter,
-        impressum
-    },
-    created() {
-        this.loadData({ search: "", page: 1 });
+  data() {
+    return {
+      articles: [],
+      showImpressum: false
+    };
+  },
+  components: {
+    ShoppingCartPopup,
+    pagination,
+    search,
+    sitefooter,
+    impressum
+  },
+  created() {
+    this.loadData({ search: "", page: 1 });
 
-    },
-    methods: {
-        loadData({ search, page }) {
-            const self = this;
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', '/api/articles?page=' + page + '&search=' + search);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        self.articles = JSON.parse(xhr.responseText);
+  },
+  methods: {
+    loadData({ search, page }) {
+      const self = this;
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', '/api/articles?page=' + page + '&search=' + search);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            self.articles = JSON.parse(xhr.responseText);
 
 
-                    }
-                }
-            }
-            xhr.send();
-        },
-        addCartItem(event) {
-            const self = this;
-            const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/api/shoppingcart');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader("X-CSRF-Token", csrfToken);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response.errors) {
-                            alert(response.errors);
-                        } else {
-                            self.loadData({ search: "", page: self.articles.current_page });
-                        }
-                    }
-                }
-            }
-            xhr.send(JSON.stringify({
-                id: event.target.parentElement.id
-            }));
-        },
-        imprint(show) {
-            const self = this;
-            self.showImpressum = show;
+          }
         }
+      }
+      xhr.send();
+    },
+    addCartItem(event) {
+      const self = this;
+      const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/shoppingcart');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.errors) {
+              alert(response.errors);
+            } else {
+              self.loadData({ search: "", page: self.articles.current_page });
+            }
+          }
+        }
+      }
+      xhr.send(JSON.stringify({
+        id: event.target.parentElement.id
+      }));
+    },
+    imprint(show) {
+      const self = this;
+      self.showImpressum = show;
     }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-
 $primary-font: 'Lora', sans-serif;
 $container-width: 900px;
 
 html {
   font-family: $primary-font;
   width: 100%;
-
-  body {
-    padding: 0 20px 20px 20px;
-    width: 95%;
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 2.5%;
-
-      table {
-        border-spacing: 30px;
-      }
-    }
-  }
 }
 
-i {
-  width: fit-content;
+body {
+  padding: 0 20px 20px 20px;
+  width: 95%;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 2.5%;
+
+  table {
+    border-spacing: 30px;
+  }
 }
 
 main {
@@ -196,7 +191,7 @@ main {
     position: relative;
     display: grid;
     width: $container-width;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin: 10px;
 
