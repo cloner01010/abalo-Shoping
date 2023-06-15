@@ -21,3 +21,7 @@ Route::post('/articles',[\App\Http\Controllers\articleController::class,'store']
 
 Route::get('/shoppingcart',[\App\Http\Controllers\ShoppingcartController::class,'index_api'])->name('shoppingcart_index_api');
 Route::get('/category',[\App\Http\Controllers\CategoryController::class,'index_api'])->name('category_index_api');
+Route::post('/articles/{id}/sold',[\App\Http\Controllers\ArticleController::class],'sold_api');
+Route::get('/current-user',function (){
+    return \Illuminate\Support\Facades\Session::get('abalo_id');
+});

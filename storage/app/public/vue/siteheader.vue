@@ -32,15 +32,19 @@
             </button>
         </div>
     </header>
+
 </template>
 
 <script>
 import axios from 'axios';
+
 export default {
+
     data() {
         return {
             menuItems: [],
             cat: [],
+            maintenanceMessage: '',
         };
     },
     created() {
@@ -210,4 +214,5 @@ export default {
         }
     }
 }
+
 </style>

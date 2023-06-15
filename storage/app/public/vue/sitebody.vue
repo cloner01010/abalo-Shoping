@@ -1,5 +1,9 @@
 <template>
-    <main class="container">
+    <div v-if="maintenanceMessage" class="maintenance-popup">
+        <h2>Under Maintenance</h2>
+        <p>{{maintenanceMessage}}</p>
+    </div>
+    <main v-else class="container">
         <search @search-input="loadData"></search>
         <div class="container--shopping-cart">
             <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
@@ -60,13 +64,30 @@ import pagination from "./pagination.vue";
 import search from "./search.vue";
 import impressum from "./impressum.vue";
 import sitefooter from "./sitefooter.vue";
-
+import axios from 'axios';
 export default {
+    mounted() {
+        let socket = new WebSocket('ws://127.0.0.1:8888/?user_id='+this.user_id);
+        socket.onopen = (event) => {
 
+        };
+        socket.onclose = (closeEvent) => {
+            console.log(
+                'Connection closed' +
+                ': code=', closeEvent.code,
+                '; reason=', closeEvent.reason);
+        };
+        socket.onmessage = (msgEvent) => {
+            let data=JSON.parse(msgEvent.data);
+            this.maintenanceMessage=data.message;
+        };
+    },
     data() {
         return {
             articles: [],
-            showImpressum: false
+            showImpressum: false,
+            maintenanceMessage:'',
+            user_id:'',
         };
     },
     components: {
@@ -77,9 +98,18 @@ export default {
         impressum
     },
     created() {
+        axios.get('/api/current-user')
+            .then(response => {
+                // Redirect the user to the desired location
+               this.user_id=response.data;
+            })
+            .catch(error => {
+                console.error(error);
+            });
         this.loadData({ search: "", page: 1 });
 
     },
+
     methods: {
         loadData({ search, page }) {
             const self = this;
@@ -231,4 +261,22 @@ main {
   float: right;
   margin: 25px;
 }
+.maintenance-popup {
+     background-color: #ffffff;
+     max-width: 400px;
+     margin: 100px auto;
+     padding: 20px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     text-align: center;
+ }
+
+.maintenance-popup h2 {
+    color: #333333;
+}
+
+.maintenance-popup p {
+    color: #666666;
+}
+
+
 </style>

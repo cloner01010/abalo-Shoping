@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\Paginator;
 use App\Models\ab_article;
+use App\Models\ab_user;
+use App\Models\AbaloWebsocketClient;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -106,6 +108,14 @@ class articleController extends Controller
             $new_article->save();
             return response()->json(['id' => $new_article->id]);
         }
+    }
+
+    public function sold_api(Request $request){
+        $article=ab_article::find($request->input('id'));
+        $message="Großartig! Ihr Artikel ".$article->ab_name . "wurde erfolgreich verkauf!";
+        $to=$article->ab_creator_id;
+        $websocketClient= new AbaloWebsocketClient($message,"sold",$to);
+        $websocketClient->send();
     }
 
 }
