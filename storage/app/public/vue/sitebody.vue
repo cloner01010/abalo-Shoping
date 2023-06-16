@@ -1,9 +1,32 @@
 <template>
     <div v-if="maintenanceMessage" class="maintenance-popup">
+        <button id="maintenanceMessage" class="close-button btn" @click="closePopUp">
+            <svg id="maintenanceMessage" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+            </svg>
+        </button>
         <h2>Under Maintenance</h2>
         <p>{{maintenanceMessage}}</p>
     </div>
-    <main v-else class="container">
+    <div v-if="articleSoldMessage" class="maintenance-popup">
+        <button id="articleSoldMessage" class="close-button btn" @click="closePopUp">
+            <svg  id="articleSoldMessage" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+            </svg>
+        </button>
+        <h2>Verkauft</h2>
+        <p>{{articleSoldMessage}}</p>
+    </div>
+    <div v-if="articleForSaleMessage" class="maintenance-popup">
+        <button id="articleForSaleMessage" class="close-button btn" @click="closePopUp">
+            <svg id="articleForSaleMessage" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+            </svg>
+        </button>
+        <h2>Angebot</h2>
+        <p>{{articleForSaleMessage}}</p>
+    </div>
+    <main class="container">
         <search @search-input="loadData"></search>
         <div class="container--shopping-cart">
             <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
@@ -12,46 +35,30 @@
             <pagination :pagination="articles" @page-change="loadData"></pagination>
         </div>
         <div class="container__section">
-            <div v-for="article in articles['data']" :key="article.id" class="container__section--card">
-                <img :src="article.ab_file_path" alt="Artikel">
-                <h3>{{ article.ab_name }}</h3>
-                <p>Price: {{ article.ab_price }} €</p>
-                <p>Description: {{ article.ab_description }}</p>
-                <p>Creator: {{ article.user_name }}</p>
-                <p>Created at: {{ article.ab_createdate }}</p>
-                <button @click="addCartItem" :id="article.id" class="container__button container__button--add">
-                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                        class="button--add bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
-                    </svg>
-                </button>
+            <div v-for="article in articles['data']" :key="article.id" class="container__section--card" >
+                <img style="height: 75px; background-color: coral;" v-if="article.forSale" src="../for-sale.svg" alt="failed">
+                    <img :src="article.ab_file_path" alt="Artikel">
+                    <h3>{{ article.ab_name }}</h3>
+                    <p>Price: {{ article.ab_price }} €</p>
+                    <p>Description: {{ article.ab_description }}</p>
+                    <p>Creator: {{ article.user_name }}</p>
+                    <p>Created at: {{ article.ab_createdate }}</p>
+                    <button @click="addCartItem" :id="article.id" class="container__button container__button--add">
+                        <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                             class="button--add bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                        </svg>
+                    </button>
+                    <button @click="buy" :id="article.id" class="container__button container__button--add">
+                        Kaufen
+                    </button>
+                    <button  v-if="article.ab_creator_id===user_id" @click="articleForSale" :id="article.id" class="container__button container__button--add">
+                        Artikel jetzt als Angebot anbieten
+                    </button>
             </div>
-        </div>
-        <!-- <table id="articles-table">
-            <tr id="header-table">
-                <th></th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Creator</th>
-                <th>Created at</th>
-            </tr>
-            <tr v-for="article in articles['data']" :key="article.id">
-                <th><img class="article__image" :src="article.ab_file_path" alt="Artikel"></th>
-                <th>{{article.ab_name}}</th>
-                <th>{{article.ab_price}}€</th>
-                <th>{{article.ab_description}}</th>
-                <th>{{article.user_name}}</th>
-                <th>{{article.ab_createdate}}</th>
-                <th><button @click="addCartItem" :id="article.id" class="button button--add">
-                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="button--add bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
-                    </svg>
-                </button></th>
-            </tr>
 
-        </table> -->
+        </div>
     <sitefooter @show-impressum="imprint"></sitefooter>
     <impressum @hide-impressum="imprint" v-if="showImpressum"></impressum>
   </main>
@@ -67,6 +74,7 @@ import sitefooter from "./sitefooter.vue";
 import axios from 'axios';
 export default {
     mounted() {
+        this.loadData({ search: "", page: 1 });
         axios.get('/api/current-user')
             .then(response => {
                 // Redirect the user to the desired location
@@ -84,7 +92,22 @@ export default {
                 };
                 socket.onmessage = (msgEvent) => {
                     let data=JSON.parse(msgEvent.data);
-                    this.maintenanceMessage=data.message;
+                    if(data.from==='MaintenanceMode'){
+                        this.maintenanceMessage=data.message;
+                    }
+                    else if (data.from==='sold'){
+                        this.articleSoldMessage=data.message;
+                    }
+                    else if (data.from==='forSale'){
+                        let message=data.message.split('#');
+                        const articles=this.articles["data"];
+                        for (let i = 0; i < articles.length; i++) {
+                            if (articles[i].id == message[1]) {
+                                this.articles["data"][i].forSale=true;
+                                this.articleForSaleMessage=message[0];
+                            }
+                        }
+                    }
                 };
             })
             .catch(error => {
@@ -97,6 +120,8 @@ export default {
             articles: [],
             showImpressum: false,
             maintenanceMessage:'',
+            articleSoldMessage:'',
+            articleForSaleMessage:'',
             user_id:'',
         };
     },
@@ -108,7 +133,7 @@ export default {
         impressum
     },
     created() {
-        this.loadData({ search: "", page: 1 });
+       // this.loadData({ search: "", page: 1 });
 
     },
 
@@ -128,6 +153,39 @@ export default {
         }
       }
       xhr.send();
+    },
+    buy(event){
+        const self = this;
+        const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/articles/'+event.target.id+'/sold');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.errors) {
+                        alert(response.errors);
+                    } else {
+                        console.log('Artikel '+event.target.id+' sold');
+                    }
+                }
+            }
+        }
+        xhr.send(JSON.stringify({
+            id: event.target.id
+        }));
+    },
+    closePopUp(event){
+            const id=event.target.parentElement.id;
+            if(id==='maintenanceMessage'){
+                this.maintenanceMessage='';
+            }else if(id==='articleSoldMessage'){
+                this.articleSoldMessage='';
+            }else if(id==='articleForSaleMessage'){
+                this.articleForSaleMessage='';
+            }
     },
     addCartItem(event) {
       const self = this;
@@ -155,6 +213,17 @@ export default {
     imprint(show) {
       const self = this;
       self.showImpressum = show;
+    },
+    articleForSale(event){
+        const articleId=event.target.id;
+        axios.get('/api/articles/for-sale?article_id='+articleId)
+            .then(response => {
+                console.log('Artikel '+articleId+' wird günstiger angeboten')
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
     }
   }
 }
@@ -273,6 +342,9 @@ main {
 
 .maintenance-popup p {
     color: #666666;
+}
+.close-button{
+    float: right;
 }
 
 

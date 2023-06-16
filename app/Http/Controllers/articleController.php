@@ -64,7 +64,11 @@ class articleController extends Controller
             ->orderBy('ab_article.id');
 
         $query = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%');
-        return $this->paginateQuery($query,$request->input('page'));
+        $data = $this->paginateQuery($query,$request->input('page'));
+        foreach ($data as $d){
+            $d->forSale=false;
+        }
+        return $data;
 
     }
 
@@ -112,10 +116,16 @@ class articleController extends Controller
 
     public function sold_api(Request $request){
         $article=ab_article::find($request->input('id'));
-        $message="Großartig! Ihr Artikel ".$article->ab_name . "wurde erfolgreich verkauf!";
+        $message="Großartig! Ihr Artikel ".$article->ab_name ." wurde erfolgreich verkauf!";
         $to=$article->ab_creator_id;
         $websocketClient= new AbaloWebsocketClient($message,"sold",$to);
         $websocketClient->send();
     }
-
+    public function forSale_api(Request $request){
+        $article_id=$request->get('article_id');
+        $article=ab_article::find($article_id);
+        $message="Der Artikel ".$article->ab_name." wird nun günstiger angeboten! Greifen Sie schnell zu.#".$article_id;
+        $websocketClient= new AbaloWebsocketClient($message,"forSale");
+        $websocketClient->send();
+    }
 }

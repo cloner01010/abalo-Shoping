@@ -20,7 +20,7 @@
 @section("cookie-popup")
     @parent
 @endsection
-@include('header')
+@include('Header')
 <main>
     <table id="articles-table">
         <tr id="header-table">

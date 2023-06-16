@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Ratchet\ConnectionInterface;
@@ -26,13 +27,30 @@ class WebsocketController extends Controller implements \Ratchet\MessageComponen
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-
-        foreach ($this->clients as $client) {
-           // if ($from !== $client) {
-                // The sender is not the receiver, send to each client connected
-                $client->send($msg);
-            //}
+        $msg_json= json_decode($msg);
+        switch ($msg_json->from){
+            case 'sold':
+                foreach ($this->clients as $client) {
+                    if ($client->resourceId==$msg_json->to) {
+                        Log::info($msg_json->message);
+                        $client->send($msg);
+                    }
+                }
+                break;
+            case 'MaintenanceMode':
+                foreach ($this->clients as $client) {
+                    $client->send($msg);
+                }
+                break;
+            case 'forSale':
+                foreach ($this->clients as $client) {
+                    if($from!=$client){
+                        $client->send($msg);
+                    }
+                }
+                break;
         }
+
     }
 
     public function onClose(ConnectionInterface $conn) {
