@@ -120,6 +120,7 @@ class articleController extends Controller
         $to=$article->ab_creator_id;
         $websocketClient= new AbaloWebsocketClient($message,"sold",$to);
         $websocketClient->send();
+        return $article;
     }
     public function forSale_api(Request $request){
         $article_id=$request->get('article_id');

@@ -58,10 +58,12 @@ class WebsocketController extends Controller implements \Ratchet\MessageComponen
         $this->clients->detach($conn);
 
         Log::info( "Connection {$conn->resourceId} has disconnected\n");
+        echo "Connection {$conn->resourceId} has disconnected\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
         Log::info( "An error has occurred: {$e->getMessage()}\n");
+        echo"An error has occurred: {$e->getMessage()}\n";
 
         $conn->close();
     }

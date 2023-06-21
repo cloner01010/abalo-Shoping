@@ -92,8 +92,8 @@ export default {
                 };
                 socket.onmessage = (msgEvent) => {
                     let data=JSON.parse(msgEvent.data);
-                    if(data.from==='MaintenanceMode'){
-                        this.maintenanceMessage=data.message;
+                    if(data.from==='MaintenanceMode') {
+                        this.maintenanceMessage = data.message;
                     }
                     else if (data.from==='sold'){
                         this.articleSoldMessage=data.message;
@@ -102,7 +102,7 @@ export default {
                         let message=data.message.split('#');
                         const articles=this.articles["data"];
                         for (let i = 0; i < articles.length; i++) {
-                            if (articles[i].id == message[1]) {
+                            if (parseInt(articles[i].id)=== parseInt(message[1])) {
                                 this.articles["data"][i].forSale=true;
                                 this.articleForSaleMessage=message[0];
                             }
@@ -346,6 +346,7 @@ main {
 .close-button{
     float: right;
 }
+
 
 
 </style>
