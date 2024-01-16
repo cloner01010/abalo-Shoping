@@ -1,25 +1,23 @@
 <template>
     <main>
-       <search @search-input="loadData"></search>
-        <div class="shopping-cart">
+
+   <!--     <div class="shopping-cart">
             <shopping-cart-popup :current-page="articles.current_page" @remove-item="loadData"></shopping-cart-popup>
-        </div>
+        </div> -->
         <div class="pagination">
             <pagination  :pagination="articles" @page-change="loadData"></pagination>
         </div>
         <div class="card-container">
             <div  v-for="article in articles['data']" :key="article.id" class="card">
                 <img :src="article.ab_file_path" alt="Artikel">
-                <h3>{{article.ab_name}}</h3>
-                <p>Price: {{article.ab_price}} €</p>
-                <p>Description: {{article.ab_description}}</p>
-                <p>Creator: {{article.user_name}}</p>
-                <p>Created at: {{article.ab_createdate}}</p>
-                <button @click="addCartItem" :id="article.id" class="btn add-btn">
-                    <svg :id="article.id" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="add-btn bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
-                    </svg>
-                </button>
+                <h2>{{article.ab_name}}</h2>
+                <h3>{{article.ab_price}} €</h3>
+                <h5>{{article.ab_description}}</h5>
+                <h5>Von <a href="">{{article.user_name}}</a></h5>
+                <h5>Seit {{article.ab_createdate}} Tagen Online</h5>
+                <p>
+                    <input type="submit" id="login" value="Anfrage Senden">
+                </p>
             </div>
         </div>
        <!-- <table id="articles-table">
@@ -127,6 +125,37 @@ export default {
 </script>
 
 <style scoped>
+
+input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 4px;
+}
+input[type="submit"] {
+    border: none;
+    display: block;
+    background-color: #3ca9e2;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    font-size: 18px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+}
+input[type="submit"]:hover {
+    background-color: #329dd5;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
 .pagination{
     float: left;
     margin:25px;
@@ -209,14 +238,14 @@ table{
 
 .card {
     width: 300px;
-    background-color: #f1f1f1;
+    background-color: #e5dada;
     padding: 20px;
     border-radius: 8px;
 }
 
 .card img {
-    width: 100%;
-    height: auto;
+    width: 300px;
+    height: 200px;
     border-radius: 8px;
     margin-bottom: 10px;
 }

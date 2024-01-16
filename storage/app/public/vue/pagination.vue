@@ -58,13 +58,13 @@ export default {
 .pagination-list li {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #f2f2f2;
+    background-color: #e5dada;
     margin-right: 5px;
     cursor: pointer;
 }
 
 .pagination-list li.active {
-    background-color: #b0c4de;
+    background-color: #565353;
 }
 </style>
 

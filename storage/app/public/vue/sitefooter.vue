@@ -55,7 +55,7 @@ export default {
 /* Footer styles */
 .footer {
     position: absolute;
-    background-color: #f8f8f8;
+    background-color: #e5dada;
     padding: 40px 0;
     color: #777;
     font-size: 14px;

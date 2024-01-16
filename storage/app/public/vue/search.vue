@@ -34,15 +34,16 @@ export default {
 
 <style scoped>
 .search-container {
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5;
+    background-color: #e5dada;
     border-radius: 4px;
+    border: 1px solid black;
     padding: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .search-input {
-    flex: 1;
+    width: 250px;
     border: none;
     outline: none;
     background-color: transparent;
@@ -50,9 +51,8 @@ export default {
     padding: 8px;
 }
 .search-button{
-    background-color: #f5f5f5;
+    background-color: #e5dada;
     border: none; /* Remove borders */
-    width: fit-content;
     padding: 0px 10px;
     margin: 10px;
     cursor: pointer; /* Mouse pointer on hover */
@@ -60,7 +60,7 @@ export default {
 
 }
 .search-button:hover {
-    background-color: RoyalBlue;
+    background-color: #b67a69;
 }
 
 </style>

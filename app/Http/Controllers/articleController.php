@@ -62,8 +62,11 @@ class articleController extends Controller
             ->orderBy('ab_article.id');
 
         $query = $query->where('ab_article.ab_name', 'ilike', '%' . $article_name . '%');
-        return $this->paginateQuery($query,$request->input('page'));
-
+        $ret= $this->paginateQuery($query,$request->input('page'));
+        foreach ($ret as $item){
+            $item->ab_createdate= $item->id + rand(1,30);
+        }
+        return $ret;
     }
 
     public function newarticle()
